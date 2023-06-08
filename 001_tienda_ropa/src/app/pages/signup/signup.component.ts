@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-signup',
@@ -19,7 +21,7 @@ export class SignupComponent implements OnInit{
     perfil:''
   };
 
-  constructor(private userService: UserService){}
+  constructor(private userService: UserService, private snack:MatSnackBar){}
 
   ngOnInit(): void {    
   }
@@ -27,17 +29,57 @@ export class SignupComponent implements OnInit{
   formSubmit(){
     console.log(this.user);
     if(this.user.userName == '' || this.user.userName == null){
-      alert("El nombre de usuario es requerido");
+      this.snack.open("El nombre de usuario es obligatorio", "Aceptar", {
+        duration: 3000,
+        verticalPosition: "top",
+        horizontalPosition: "right"
+      });
+      return;
+    }
+    if(this.user.password == '' || this.user.password == null){
+      this.snack.open("El contraseña es obligatoria", "Aceptar", {
+        duration: 3000,
+        verticalPosition: "top",
+        horizontalPosition: "right"
+      });
+      return;
+    }
+    if(this.user.nombre == '' || this.user.nombre == null){
+      this.snack.open("El nombre es obligatorio", "Aceptar", {
+        duration: 3000,
+        verticalPosition: "top",
+        horizontalPosition: "right"
+      });
+      return;
+    }
+    if((this.user.primerApellido == '' || this.user.primerApellido == null) || (this.user.segundoApellido == '' || this.user.segundoApellido == null)){
+      this.snack.open("El primer y segundo apellido son obligatorios", "Aceptar", {
+        duration: 3000,
+        verticalPosition: "top",
+        horizontalPosition: "right"
+      });
+      return;
+    }
+    if(this.user.email == '' || this.user.email == null){
+      this.snack.open("El correo electrónico es obligatorio", "Aceptar", {
+        duration: 3000,
+        verticalPosition: "top",
+        horizontalPosition: "right"
+      });
       return;
     }
 
     this.userService.registrarUsuario(this.user).subscribe(
       (data) => {
         console.log(data);
-        alert("Usuario guardado con éxito");
+        Swal.fire("Usuario guardado", "Usuario registrado con éxito", "success");
       }, (error) =>{
         console.log(error);
-        alert("Ha ocurrido un error en el sistema");
+        this.snack.open("Ha ocurrido un error en el sistema", "Aceptar", {
+          duration: 3000,
+          verticalPosition: "top",
+          horizontalPosition: "right"
+        });
       }
     )
   }
