@@ -16,6 +16,14 @@ export class ProductoService {
   }
 
   public eliminarProducto(idProducto: number){
-    return this.httpClient.delete(`${baseUrl}/eliminar/${idProducto}`)
+    return this.httpClient.delete(`${baseUrl}/eliminar/${idProducto}`);
+  }
+
+  public buscarProductoID(idProducto: number){
+    return this.httpClient.get(`${baseUrl}/buscar/${idProducto}`);
+  }
+
+  public guardarProducto(producto: any){
+    return this.httpClient.post(`${baseUrl}/guardar`, producto);
   }
 }

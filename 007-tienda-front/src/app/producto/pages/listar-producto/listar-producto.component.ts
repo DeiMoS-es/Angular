@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 export class ListarProductoComponent implements OnInit{
   dataSource?: any = [];
   displayedColumns: string[] = ['nombreProducto', 'stock', 'precioProducto', 'acciones'];
-
+  producto:any;
 
   constructor(private productoService: ProductoService){}
 
@@ -36,5 +36,14 @@ export class ListarProductoComponent implements OnInit{
       }
     )
   }
-  buscarPorID(idProducto: number){console.log(idProducto);}
+  
+  buscarPorID(idProducto: number){
+    this.productoService.buscarProductoID(idProducto).subscribe(
+      (data) => {
+        this.producto = data;
+        console.log(this.producto);
+      }
+    )
+    console.log(idProducto);
+  }
 }
