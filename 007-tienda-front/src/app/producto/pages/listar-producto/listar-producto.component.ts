@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductoService } from '../../services/producto.service';
 import Swal from 'sweetalert2';
+import { ProductoDetalleComponent } from '../producto-detalle/producto-detalle.component';
+import { Producto } from 'src/app/model';
 
 @Component({
   selector: 'app-listar-producto',
@@ -11,6 +13,8 @@ export class ListarProductoComponent implements OnInit{
   dataSource?: any = [];
   displayedColumns: string[] = ['nombreProducto', 'stock', 'precioProducto', 'acciones'];
 
+  productoSeleccionado: any;
+  //mostrarDetalle = false;
 
   constructor(private productoService: ProductoService){}
 
@@ -18,6 +22,9 @@ export class ListarProductoComponent implements OnInit{
     this.listarProductos();
   }
 
+  mostrarDetalle(producto: Producto){
+    this.productoSeleccionado = producto;
+  }
   listarProductos(){
     this.productoService.listarProductos().subscribe(
       productos => {
@@ -36,5 +43,17 @@ export class ListarProductoComponent implements OnInit{
       }
     )
   }
-  buscarPorID(idProducto: number){console.log(idProducto);}
+
+  buscarPorID(idProducto: number){
+    this.productoService.buscarProductoId(idProducto).subscribe(
+      producto=>{  
+       this.productoSeleccionado = producto;      
+        console.log(producto);
+      }
+    )
+  }
+
+  cerrarDetalle(){
+    // this.mostrarDetalle = false;
+  }
 }

@@ -40,4 +40,5 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
   
+  <app-producto-detalle *ngIf="productoSeleccionado && mostrarDetalle" [producto]="productoSeleccionado"></app-producto-detalle>
   

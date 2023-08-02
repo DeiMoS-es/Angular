@@ -1,0 +1,14 @@
+<mat-card>
+    <mat-card-header>
+      <div mat-card-avatar class="product-image"><img [src]="producto.imgProducto" alt=""></div>
+      <mat-card-title>{{ producto.nombreProducto }}</mat-card-title>
+      <mat-card-subtitle>Precio: {{ producto.precioProducto | currency }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Stock: {{ producto.cantidadProducto }}</p>
+      <!-- Aquí puedes mostrar otros detalles del producto -->
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="cerrarDetalle()">Cerrar</button>
+    </mat-card-actions>
+  </mat-card>
