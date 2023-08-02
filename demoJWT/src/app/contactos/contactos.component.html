@@ -1,0 +1,23 @@
+<div class="container mt-5" *ngIf="contactos">
+    <h3>Mis contactos</h3>
+    <table class="mt-5 table table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Fecha Nacimiento</th>
+                <th>Teléfono</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+            <tbody>
+                <tr *ngFor="let contacto of contactos">
+                    <td>{{ contacto.idContacto }}</td>
+                    <td>{{ contacto.nombre }}</td>
+                    <td>{{ contacto.fechaNacimiento | date:'dd/MM/yyyy' }}</td>
+                    <td>{{ contacto.telefono }}</td>
+                    <td>{{ contacto.email }}</td>
+                </tr>
+            </tbody>        
+    </table>
+</div>

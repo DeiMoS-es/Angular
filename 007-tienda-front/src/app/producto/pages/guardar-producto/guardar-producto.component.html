@@ -19,6 +19,7 @@
                     </mat-form-field>
                     <mat-form-field class="full-width" appearance="outline" >
                         <mat-label>Stock del producto: </mat-label>
+<<<<<<< HEAD
                         <input required [(ngModel)] = "producto.stock" name = "stock" type = "number" matInput placeholder="Escribe el stock del producto">
                     </mat-form-field>
                     <mat-form-field class="full-width" appearance="outline">
@@ -34,14 +35,29 @@
                         <mat-label>Foto de perfil: </mat-label>
                         <input matInput placeholder="Selecciona una foto" type="text" name="" id="">
                     </mat-form-field> -->
+=======
+                        <input required [(ngModel)] = "producto.cantidadProducto" name = "stock" type = "number" matInput placeholder="Escribe el stock del producto">
+                    </mat-form-field>
+                      <div class="text-center form-group mb-2">
+                        <label for="imagen">Seleccionar imagen:</label>
+                        <input type="file" (change)="onFileSelected($event)" accept="image/*" id="imagen" name="imagen">
+                      </div>
+>>>>>>> prueba
                     <div class="container text-center">
                         <button mat-raised-button color="primary">Registrar</button>
                         <button type="reset" style="margin-left: 20px;" mat-raised-button color="accent">Limpiar</button>
                     </div>
                 </form>
+<<<<<<< HEAD
                 <br><br><br>
+=======
+                
+>>>>>>> prueba
             </div>
         </div>
     <!-- </div> -->
 <!-- </div> -->
+<<<<<<< HEAD
 
+=======
+>>>>>>> prueba

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductoService } from '../../services/producto.service';
 import Swal from 'sweetalert2';
+import { ProductoDetalleComponent } from '../producto-detalle/producto-detalle.component';
+import { Producto } from 'src/app/model';
 
 @Component({
   selector: 'app-listar-producto',
@@ -10,7 +12,13 @@ import Swal from 'sweetalert2';
 export class ListarProductoComponent implements OnInit{
   dataSource?: any = [];
   displayedColumns: string[] = ['nombreProducto', 'stock', 'precioProducto', 'acciones'];
+<<<<<<< HEAD
   producto:any;
+=======
+
+  productoSeleccionado: any;
+  //mostrarDetalle = false;
+>>>>>>> prueba
 
   constructor(private productoService: ProductoService){}
 
@@ -18,6 +26,9 @@ export class ListarProductoComponent implements OnInit{
     this.listarProductos();
   }
 
+  mostrarDetalle(producto: Producto){
+    this.productoSeleccionado = producto;
+  }
   listarProductos(){
     this.productoService.listarProductos().subscribe(
       productos => {
@@ -36,6 +47,7 @@ export class ListarProductoComponent implements OnInit{
       }
     )
   }
+<<<<<<< HEAD
   
   buscarPorID(idProducto: number){
     this.productoService.buscarProductoID(idProducto).subscribe(
@@ -45,5 +57,19 @@ export class ListarProductoComponent implements OnInit{
       }
     )
     console.log(idProducto);
+=======
+
+  buscarPorID(idProducto: number){
+    this.productoService.buscarProductoId(idProducto).subscribe(
+      producto=>{  
+       this.productoSeleccionado = producto;      
+        console.log(producto);
+      }
+    )
+  }
+
+  cerrarDetalle(){
+    // this.mostrarDetalle = false;
+>>>>>>> prueba
   }
 }
