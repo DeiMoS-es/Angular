@@ -25,3 +25,9 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+## Pasos para cargar la "base de datos" en server/db.json
+Primero instalamos la dependencia npm i -g json-server.
+Segundo vamos al package.json y en script añadimos "serverAPI": "json-server --watch server/db.json --port 3000" el puerto es opcional
+Ejecutar el comando npm run serverAPI
