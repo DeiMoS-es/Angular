@@ -26,7 +26,7 @@
             <td></td>
             <td>{{producto.precioProducto}}</td>
             <td>{{producto.ivaProducto}}</td>
-            <td><a class="btn btn-warning" (click)="buscarProductoId(producto.idProducto)">Editar</a></td>
+            <td><a class="btn btn-warning" (click)="editarProducto(producto.idProducto)">Editar</a></td>
             <td><a class="btn btn-danger" (click)="eliminarProducto(producto.idProducto, producto.nombreProducto)">Eliminar</a></td>
         </tr>
     </tbody>

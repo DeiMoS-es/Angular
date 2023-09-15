@@ -27,5 +27,9 @@ export class ProductoServiceService {
     return this.httpClient.get(`${this.baseURL}/buscar/${idProducto}`);
   }
 
+  public editarProducto(idProducto: number,productoActualizado: Producto){
+    return this.httpClient.put(`${this.baseURL}/editar/${idProducto}`, productoActualizado);
+  }
+
   
 }
