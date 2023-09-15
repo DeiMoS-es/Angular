@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Producto } from './entity/producto';
+import { Producto } from '../entity/producto';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +13,18 @@ export class ProductoServiceService {
   constructor(private httpClient: HttpClient) { }
 
   //Método para obtener los productos
-  obtenerListaProductos():Observable<Producto[]>{
+  public obtenerListaProductos():Observable<Producto[]>{
     return this.httpClient.get<Producto[]>(`${this.baseURL}/todos`);
+  }
+
+  //Método para eliminar un producto
+  public eliminarProducto(idProducto: number){
+    return this.httpClient.delete(`${this.baseURL}/eliminar/${idProducto}`);
+  }
+
+  //Método para buscar un producto por ID
+  public buscarProductoId(idProducto: number){
+    return this.httpClient.get(`${this.baseURL}/buscar/${idProducto}`);
   }
 
   
