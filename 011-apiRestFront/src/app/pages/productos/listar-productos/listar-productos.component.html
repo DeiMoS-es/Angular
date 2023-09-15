@@ -1,1 +1,17 @@
-<p>listar-productos works!</p>
+<h2>Lista de Productos</h2>
+<table class="table table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Iva</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let producto of productos">
+            <th>{{producto.nombreProducto}}</th>
+            <th>{{producto.precioProducto}}</th>
+            <th>{{producto.ivaProducto}}</th>
+        </tr>
+    </tbody>
+</table>

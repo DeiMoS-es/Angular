@@ -37,3 +37,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Voy a empezar creando el crud de productos
 - Dentro de src/app/pages/productos, creo la entidad para mapear los datos que recibo desde el back, y el componente para listar los productos
+- Para crear el servicio de producto, es necesario añadir en el app.module el módulo HttpClientModule, que será el encargado de manejar las distintas solicitudes en el backend
