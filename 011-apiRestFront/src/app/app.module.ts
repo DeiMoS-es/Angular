@@ -13,11 +13,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { EditarProductosComponent } from './pages/productos/editar-productos/editar-productos.component';
+import { CrearProductoComponent } from './pages/productos/crear-producto/crear-producto.component';
 
 // Angular Material
-import { MatCardModule 
-} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
+
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     HeaderComponent,
     FooterComponent,
     EditarProductosComponent,
+    CrearProductoComponent,
     
   ],
   imports: [
