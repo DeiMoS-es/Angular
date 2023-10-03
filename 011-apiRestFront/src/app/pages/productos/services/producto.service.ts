@@ -35,7 +35,12 @@ export class ProductoServiceService {
     return this.httpClient.post(`${this.baseURL}/guardar`, producto);
   }
 
+  public buscarTiempoReal(nombreProducto: string): Observable<Producto[]>{
+    const url = `${this.baseURL}/buscarEnTiempoReal/${nombreProducto}`;
+    return this.httpClient.get<Producto[]>(url);
+  }
+
   public buscarPorNombre(nombreProducto: string){
-    return this.httpClient.get(`${this.baseURL}buscarNombre/${nombreProducto};`)
+    return this.httpClient.get(`${this.baseURL}/buscarNombre/${nombreProducto}`);
   }
 }
