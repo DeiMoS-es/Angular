@@ -31,10 +31,21 @@ export class ListarProductosComponent implements OnInit{
     this.productoService.eliminarProducto(idProducto).subscribe(
       (response: any)=>{
         const mensaje = response.mensaje;
-      Swal.fire("Producto eliminado", mensaje, "warning");
-      this.obternerProductos();
+        Swal.fire({
+          title: "Producto eliminado",
+          icon: "warning",
+          timer: 2000, // Tiempo en milisegundos (en este caso, 3 segundos)
+          showConfirmButton: false, // Ocultar el botón de confirmación
+        })
+        this.obternerProductos();
       }, (error) => {
-        Swal.fire("Error", "Ocurrió un error al eliminar el producto.", "error");
+        console.log(error);
+        Swal.fire({
+          title: "Error al eliminar el producto",
+          icon: "error",
+          timer: 2000, // Tiempo en milisegundos (en este caso, 3 segundos)
+          showConfirmButton: false, // Ocultar el botón de confirmación
+        })
       }
     );
   }

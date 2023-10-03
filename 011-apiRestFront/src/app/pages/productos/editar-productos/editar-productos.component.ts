@@ -43,13 +43,23 @@ export class EditarProductosComponent {
       // console.log(this.editForm.value); // Muestra los datos en la consola
       this.productoService.editarProducto(this.idProducto, this.editForm.value).subscribe(
         (response) =>{
-          Swal.fire("Producto editado", "Click para continuar","success");          
+          Swal.fire({
+            title: "Producto editado",
+            icon: "success",
+            timer: 2000, // Tiempo en milisegundos (en este caso, 3 segundos)
+            showConfirmButton: false, // Ocultar el botón de confirmación
+          })
           this.route.navigate(['/productos']);
         },
         (error) => {
           // Manejar errores si la solicitud PUT falla
           console.error('Error al editar el producto', error);
-          Swal.fire("Error", error, "error");
+          Swal.fire({
+            title: "Error al crear el producto",
+            icon: "error",
+            timer: 2000, // Tiempo en milisegundos (en este caso, 3 segundos)
+            showConfirmButton: false, // Ocultar el botón de confirmación
+          })
         }
       );
     }
@@ -58,5 +68,4 @@ export class EditarProductosComponent {
   cancelar(){
     this.route.navigate(['/productos']);
   }
-  // Otras funciones, como guardarCambios() y cancelarEdicion(), si es necesario
 }

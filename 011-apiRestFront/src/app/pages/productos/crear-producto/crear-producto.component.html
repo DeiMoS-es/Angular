@@ -1,24 +1,36 @@
 <div class="container">
-    <div class="row">
-      <div class="col-md-6 offset-md-3">
-        <h2>Crear Producto</h2>
-        <form [formGroup]="editForm" (ngSubmit)="onSubmit()" *ngIf="productoEditar">
-          <div class="form-group">
-            <label for="nombreProducto">Nombre del producto</label>
-            <input type="text" class="form-control" id="nombreProducto" formControlName="nombreProducto" [(ngModel)]="productoEditar.nombreProducto">
-          </div>
-          <div class="form-group">
-            <label for="precioProducto">Precio</label>
-            <input type="number" class="form-control" id="precioProducto" formControlName="precioProducto" [(ngModel)]="productoEditar.precioProducto">
-          </div>
-          <div class="form-group">
-            <label for="ivaProducto">Iva</label>
-            <input type="number"a class="form-control" id="iva" formControlName="ivaProducto" rows="3" [(ngModel)]="productoEditar.ivaProducto">
-          </div>
-          <button type="submit" class="btn btn-primary">Guardar</button>
-          <button type="button" class="btn btn-secondary">Cancelar</button>
-        </form>
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h2>Crear Producto</h2>
+      <!-- Mensaje de error -->
+      <div class="alert alert-danger" *ngIf="formularioEnviado && createForm.invalid">
+        Por favor, revisa los campos del formulario.
       </div>
+      <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="nombreProducto">Nombre del producto</label>
+          <input type="text" class="form-control" id="nombreProducto" formControlName="nombreProducto">
+          <div *ngIf="createForm.get('nombreProducto')?.invalid && createForm.get('nombreProducto')?.touched">
+            <div class="alert alert-danger">Nombre del producto es requerido</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="precioProducto">Precio</label>
+          <input type="number" class="form-control" id="precioProducto" formControlName="precioProducto">
+          <div *ngIf="createForm.get('precioProducto')?.invalid && createForm.get('precioProducto')?.touched">
+            <div class="alert alert-danger">El precio del producto es requerido</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="ivaProducto">Iva</label>
+          <input type="number" a class="form-control" id="ivaProducto" formControlName="ivaProducto" rows="3">
+          <div *ngIf="createForm.get('ivaProducto')?.invalid && createForm.get('ivaProducto')?.touched">
+            <div class="alert alert-warning">Se pondrá un Iva del 4%</div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="button" class="btn btn-secondary">Cancelar</button>
+      </form>
     </div>
   </div>
-  
+</div>

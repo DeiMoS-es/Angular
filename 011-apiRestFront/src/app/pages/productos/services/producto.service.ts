@@ -31,5 +31,11 @@ export class ProductoServiceService {
     return this.httpClient.put(`${this.baseURL}/editar/${idProducto}`, productoActualizado);
   }
 
-  
+  public crearProducto(producto: Producto){
+    return this.httpClient.post(`${this.baseURL}/guardar`, producto);
+  }
+
+  public buscarPorNombre(nombreProducto: string){
+    return this.httpClient.get(`${this.baseURL}buscarNombre/${nombreProducto};`)
+  }
 }
