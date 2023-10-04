@@ -3,6 +3,7 @@ import { Producto } from '../entity/producto';
 import { ProductoServiceService } from '../services/producto.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { ContadorCarritoService } from '../services/contador-carrito.service';
 
 
 @Component({
@@ -11,11 +12,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./listar-productos.component.css']
 })
 export class ListarProductosComponent implements OnInit{
-
   productos: Producto[];
   producto: any;
+  listaProductos: Producto[] = [];
 
-  constructor(private productoService: ProductoServiceService, private router: Router){};
+  constructor(private productoService: ProductoServiceService, private router: Router, private contadorCarritoService: ContadorCarritoService){};
 
   ngOnInit(): void {
     this.obternerProductos();
@@ -50,19 +51,24 @@ export class ListarProductosComponent implements OnInit{
     );
   }
 
-  public buscarProductoId(idProducto: number){
-    this.productoService.buscarProductoId(idProducto).subscribe(
-      (data) => {
-        this.producto = data;
-        console.log(this.producto);
-      }
-    );
-  }
-
   // Función para editar un producto
   editarProducto(id: number) {
     // Navega a la página de edición con el ID del producto
     this.router.navigate(['/editar-producto', id]);
   }
 
+  addProductoV2(idProducto: number){
+
+  }
+  addProducto(idProducto: number){    
+    this.productoService.buscarProductoId(idProducto).subscribe(
+      (data: any) => {
+        this.listaProductos.push(data)
+        this.contadorCarritoService.aumentarContador();
+        console.log(this.listaProductos);
+      }, (error) => {
+        console.log(error);
+      }
+    )
+  }
 }

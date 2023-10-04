@@ -15,7 +15,7 @@
             <th scope="col">Precio</th>
             <th scope="col">Iva</th>
             <th scope="col">Acción</th>
-            <th scope="col">Acción</th>
+            
         </tr>
     </thead>
     <tbody>
@@ -26,8 +26,12 @@
             <td></td>
             <td>{{producto.precioProducto}}</td>
             <td>{{producto.ivaProducto}}</td>
-            <td><a class="btn btn-warning" (click)="editarProducto(producto.idProducto)">Editar</a></td>
-            <td><a class="btn btn-danger" (click)="eliminarProducto(producto.idProducto, producto.nombreProducto)">Eliminar</a></td>
+            <td>
+                <a class="btn btn-primary" (click)="addProducto(producto.idProducto)">Añadir</a>
+                <a class="btn btn-warning" (click)="editarProducto(producto.idProducto)">Editar</a>
+                <a class="btn btn-danger" (click)="eliminarProducto(producto.idProducto, producto.nombreProducto)">Eliminar</a>
+            </td>
+            
         </tr>
     </tbody>
 </table>

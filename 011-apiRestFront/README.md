@@ -38,3 +38,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## Voy a empezar creando el crud de productos
 - Dentro de src/app/pages/productos, creo la entidad para mapear los datos que recibo desde el back, y el componente para listar los productos
 - Para crear el servicio de producto, es necesario añadir en el app.module el módulo HttpClientModule, que será el encargado de manejar las distintas solicitudes en el backend
+
+## Para poder compartir información en este caso, relacionada con el contador de productos que va a existir en el pedido, lo he solucionado con los siguientes pasos:
+- He creado un servicio para hacer el contador de productos
+- He inyectado en ambos componentes el servicio de contador, tanto en el header que es donde voy a mostar la actualización del contador y en el listar-productos ya que ahí realizo el aumento del mismo

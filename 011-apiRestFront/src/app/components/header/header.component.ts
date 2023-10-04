@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Producto } from 'src/app/pages/productos/entity/producto';
+import { ContadorCarritoService } from 'src/app/pages/productos/services/contador-carrito.service';
 import { ProductoServiceService } from 'src/app/pages/productos/services/producto.service';
 import Swal from 'sweetalert2';
 
@@ -16,8 +17,14 @@ export class HeaderComponent {
   nombreProducto: string = '';
 
 
-  constructor(private formBuilder: FormBuilder, private productoService: ProductoServiceService, private route: ActivatedRoute) {};
+  constructor(private formBuilder: FormBuilder, private productoService: ProductoServiceService, private route: ActivatedRoute, private contadorCarritoService: ContadorCarritoService) {};
 
+  obtenerContador() {
+    // Puedes acceder a las propiedades o métodos del servicio aquí
+    const contador = this.contadorCarritoService.getContadorProductos();
+    return contador;
+  }
+  
   buscarEnTiempoReal(nombreProducto: string) {
     if (nombreProducto.length >= 1) {
       // Realiza la llamada al servicio para buscar productos en tiempo real

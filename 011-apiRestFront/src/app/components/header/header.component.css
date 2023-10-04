@@ -5,3 +5,14 @@
 .ml-2{
     margin-left: 20px;
 }
+
+.contador {
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 0.2rem 0.4rem;
+    font-size: 0.8rem;
+    top: 0.2rem;
+    right: 0.2rem;
+  }
+  
