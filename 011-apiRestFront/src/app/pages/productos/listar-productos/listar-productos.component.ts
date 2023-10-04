@@ -4,6 +4,7 @@ import { ProductoServiceService } from '../services/producto.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { ContadorCarritoService } from '../services/contador-carrito.service';
+import { CarritoService } from '../services/carrito.service';
 
 
 @Component({
@@ -14,9 +15,11 @@ import { ContadorCarritoService } from '../services/contador-carrito.service';
 export class ListarProductosComponent implements OnInit{
   productos: Producto[];
   producto: any;
-  listaProductos: Producto[] = [];
 
-  constructor(private productoService: ProductoServiceService, private router: Router, private contadorCarritoService: ContadorCarritoService){};
+  constructor(private productoService: ProductoServiceService, 
+              private router: Router, 
+              private contadorCarritoService: ContadorCarritoService,
+              private carritoService: CarritoService ){};
 
   ngOnInit(): void {
     this.obternerProductos();
@@ -63,9 +66,9 @@ export class ListarProductosComponent implements OnInit{
   addProducto(idProducto: number){    
     this.productoService.buscarProductoId(idProducto).subscribe(
       (data: any) => {
-        this.listaProductos.push(data)
+        this.carritoService.agregarProducto(data);
         this.contadorCarritoService.aumentarContador();
-        console.log(this.listaProductos);
+        console.log(this.carritoService.obtenerListaProductos());
       }, (error) => {
         console.log(error);
       }

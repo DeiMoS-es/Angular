@@ -18,6 +18,7 @@ import { CrearProductoComponent } from './pages/productos/crear-producto/crear-p
 // Angular Material
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { CarritoComponent } from './components/carrito/carrito.component';
 
 
 
@@ -29,6 +30,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     FooterComponent,
     EditarProductosComponent,
     CrearProductoComponent,
+    CarritoComponent,
     
   ],
   imports: [

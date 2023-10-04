@@ -1,0 +1,8 @@
+<div class="carrito-container">
+    <h2>Carrito de Compras</h2>
+    <ul class="carrito-list">
+      <li *ngFor="let producto of listaProductos" class="carrito-item">
+        {{ producto.nombreProducto }} - Precio: {{ producto.precioProducto }}
+      </li>
+    </ul>
+  </div>
