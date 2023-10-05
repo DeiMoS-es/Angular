@@ -14,4 +14,24 @@ export class CarritoComponent {
   constructor(private carritoService: CarritoService){}
   
   listaProductos = this.carritoService.obtenerListaProductos();
+
+  disminuirCantidad(producto: Producto) {
+    if (producto.cantidad > 1) {
+      producto.cantidad--;
+    }
+  }
+  
+  aumentarCantidad(producto: Producto) {
+    producto.cantidad++;
+  }
+
+  calcularSubtotal(): number {
+    let subtotal = 0;
+    for (const producto of this.listaProductos) {
+      //calcular el iva del precio
+      let precioConIva = producto.precioProducto + (producto.precioProducto * (producto.ivaProducto/100));
+      subtotal += precioConIva * producto.cantidad;
+    }
+    return subtotal;
+  }
 }

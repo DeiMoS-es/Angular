@@ -19,6 +19,8 @@ import { CrearProductoComponent } from './pages/productos/crear-producto/crear-p
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CarritoComponent } from './components/carrito/carrito.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 
 
@@ -43,7 +45,9 @@ import { CarritoComponent } from './components/carrito/carrito.component';
     RouterModule,
 
     MatCardModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

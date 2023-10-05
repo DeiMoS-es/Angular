@@ -10,11 +10,23 @@ export class CarritoService {
   constructor() { }
 
   agregarProducto(producto: Producto) {
-    this.listaProductos.push(producto);
+    const productoExistente = this.listaProductos.find((p) => p.idProducto === producto.idProducto);
+
+    if (productoExistente) {
+      // Si el producto ya está en el carrito, aumenta la cantidad
+      productoExistente.cantidad++;
+    } else {
+      // Si el producto no está en el carrito, agrégalo
+      producto.cantidad = 1;
+      this.listaProductos.push(producto);
+    }
   }
 
   eliminarProducto(idProducto: number) {
-    // Implementa la lógica para eliminar un producto de la lista.
+    const index = this.listaProductos.findIndex((p) => p.idProducto === idProducto);
+    if (index !== -1) {
+      this.listaProductos.splice(index, 1);
+    }
   }
 
   obtenerListaProductos() {

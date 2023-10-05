@@ -1,8 +1,33 @@
 <div class="carrito-container">
     <h2>Carrito de Compras</h2>
-    <ul class="carrito-list">
-      <li *ngFor="let producto of listaProductos" class="carrito-item">
-        {{ producto.nombreProducto }} - Precio: {{ producto.precioProducto }}
-      </li>
-    </ul>
+    <table class="table">
+      <thead>
+          <tr>
+              <th scope="col">Nombre</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Iva</th>
+              <th scope="col">Cantidad</th>           
+          </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let producto of listaProductos" class="carrito-item">
+          <td>{{producto.nombreProducto}}</td>
+          <td>{{producto.precioProducto}}</td>
+          <td>{{producto.ivaProducto}}</td>
+          <td>
+            <!-- <div class="cantidad-container"> -->
+              <button mat-button color="primary" (click)="disminuirCantidad(producto)" class="custom-button">-</button>
+              {{producto.cantidad}}
+              <button mat-button color="primary" (click)="aumentarCantidad(producto)" class="custom-button">+</button>
+            <!-- </div> -->
+          </td>
+        </tr>
+      </tbody>
+  </table>
+  <div *ngIf="listaProductos.length > 0" class="subtotal-container">
+    <p>Subtotal: {{ calcularSubtotal() | currency:'EUR':'symbol':'1.2-2' }}</p>
+    <button class="btn btn-success">Comprar</button>
   </div>
+  </div>
+
+
