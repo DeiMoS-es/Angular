@@ -20,6 +20,7 @@ export class CrearProductoComponent {
     this.createForm = this.formBuilder.group({
       nombreProducto: ['', Validators.required], // Campo nombre, requerido
       precioProducto: ['', Validators.required], // Campo descripción, requerido
+      stockProducto: ['', Validators.required],
       ivaProducto: [''] // Campo IVA, ahora opcional
     });
   }

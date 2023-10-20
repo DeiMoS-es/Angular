@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Producto } from '../entity/producto';
@@ -14,7 +14,26 @@ export class ProductoServiceService {
 
   //Método para obtener los productos
   public obtenerListaProductos():Observable<Producto[]>{
-    return this.httpClient.get<Producto[]>(`${this.baseURL}/todos`);
+    // Obtiene el token almacenado en el localStorage
+    const token = localStorage.getItem('token');
+
+    // Verifica si el token existe
+    if (token) {
+      console.log("Hay token");
+      console.log(token);
+      // Agrega el token al encabezado de autorización
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      });
+      return this.httpClient.get<Producto[]>(`${this.baseURL}/todos`, {headers});
+    }else {
+      // En el caso en que no haya un token válido, puedes manejarlo según tus necesidades.
+      // En este ejemplo, simplemente rechazamos la solicitud con un observable vacío.
+      return new Observable<Producto[]>(observer => {
+        observer.next([]);
+        observer.complete();
+      });    
+    }
   }
 
   //Método para eliminar un producto

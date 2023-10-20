@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Producto } from '../entity/producto';
+import { HttpClient } from '@angular/common/http';
+import { ProductoDTO } from '../entity/productoDTO';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarritoService {
   private listaProductos: Producto[] = [];
+  private baseURLPedidos = "http://localhost:8080/pedidos";
   
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
   agregarProducto(producto: Producto) {
     const productoExistente = this.listaProductos.find((p) => p.idProducto === producto.idProducto);
@@ -31,5 +34,11 @@ export class CarritoService {
 
   obtenerListaProductos() {
     return this.listaProductos;
+  }
+
+  guardarProducto(productos: ProductoDTO[]){
+    console.log("Guardando producto");
+    console.log(productos);
+    return this.httpClient.post(`${this.baseURLPedidos}/guardar`, productos);
   }
 }

@@ -15,9 +15,13 @@ export class HeaderComponent {
   busqueda: string = '';
   sugerencias: Producto[] = [];
   nombreProducto: string = '';
+  usuarioIsLogin: boolean = false;
 
-
-  constructor(private formBuilder: FormBuilder, private productoService: ProductoServiceService, private route: ActivatedRoute, private contadorCarritoService: ContadorCarritoService) {};
+  constructor(private formBuilder: FormBuilder, 
+              private productoService: ProductoServiceService, 
+              private route: ActivatedRoute, 
+              private contadorCarritoService: ContadorCarritoService,
+              ) {};
 
   obtenerContador() {
     // Puedes acceder a las propiedades o métodos del servicio aquí

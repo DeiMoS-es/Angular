@@ -26,7 +26,7 @@
   </table>
   <div *ngIf="listaProductos.length > 0" class="subtotal-container">
     <p>Subtotal: {{ calcularSubtotal() | currency:'EUR':'symbol':'1.2-2' }}</p>
-    <button class="btn btn-success">Comprar</button>
+    <button class="btn btn-success" (click)="guardarPedido(listaProductos)">Comprar</button>
   </div>
   </div>
 

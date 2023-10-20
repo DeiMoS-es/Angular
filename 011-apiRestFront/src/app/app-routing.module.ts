@@ -4,15 +4,18 @@ import { ListarProductosComponent } from './pages/productos/listar-productos/lis
 import { EditarProductosComponent } from './pages/productos/editar-productos/editar-productos.component';
 import { CrearProductoComponent } from './pages/productos/crear-producto/crear-producto.component';
 import { CarritoComponent } from './components/carrito/carrito.component';
+import { LoginComponent } from './pages/usuario/login/login.component';
 
 const routes: Routes = [
   //Rutas para productos
   { path: 'productos', component:ListarProductosComponent},
   //para ruta vacía
-  { path: '', redirectTo:'productos', pathMatch: 'full'},
+  // { path: '', redirectTo:'productos', pathMatch: 'full'},
+  { path: '', component: LoginComponent, pathMatch: 'full'},
   { path: 'crear', component: CrearProductoComponent}, //Ruta para crear un producto
   { path: 'editar-producto/:id', component: EditarProductosComponent }, // Ruta para la edición de productos
-  { path: 'carrito', component: CarritoComponent}
+  { path: 'carrito', component: CarritoComponent},
+  { path: 'login', component: LoginComponent}
 ];
 
 @NgModule({

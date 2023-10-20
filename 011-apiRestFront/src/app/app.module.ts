@@ -21,8 +21,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { CarritoComponent } from './components/carrito/carrito.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-
-
+import { LoginComponent } from './pages/usuario/login/login.component';
+import { MatInputModule } from '@angular/material/input';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { MatButtonModule } from '@angular/material/button';
     EditarProductosComponent,
     CrearProductoComponent,
     CarritoComponent,
+    LoginComponent,
     
   ],
   imports: [
@@ -47,7 +49,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatCardModule,
     MatFormFieldModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatInputModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

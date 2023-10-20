@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h2>Iniciar Sesión</h2>
+            <!-- Mensaje de error -->
+            <div class="alert alert-danger" *ngIf="formularioEnviado && loginForm.invalid">
+                Por favor, revisa los campos del formulario.
+            </div>
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <mat-form-field class="custom-form-field full-width">
+                        <div class="icon-label-container">
+                            <mat-icon>person</mat-icon>
+                            <div class="input-label-container">
+                                <mat-label>Nombre de Usuario</mat-label>
+                                <input matInput placeholder="Escribe tu nombre de usuario" formControlName="userName">
+                            </div>
+                        </div>
+                    </mat-form-field>
+                    <div *ngIf="loginForm.get('userName')?.invalid && loginForm.get('userName')?.touched"
+                        class="alert alert-danger">
+                        Nombre de usuario es requerido
+                    </div>
+                </div>
+                <div class="form-group">
+                    <mat-form-field class="custom-form-field full-width">
+                        <div class="icon-label-container">
+                            <mat-icon>vpn_key</mat-icon>
+                            <div class="input-label-container">
+                                <mat-label>Contraseña de Usuario</mat-label>
+                                <input matInput placeholder="Escribe tu contraseña de usuario" formControlName="password" type="password">
+                            </div>
+                        </div>                        
+                    </mat-form-field>
+                    <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+                        class="alert alert-danger">
+                        Contraseña es requerida
+                    </div>
+                </div>
+
+                <button mat-raised-button color="primary" type="submit">Iniciar Sesión</button>
+            </form>
+        </div>
+    </div>
+</div>

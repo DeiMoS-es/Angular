@@ -68,9 +68,14 @@ export class ListarProductosComponent implements OnInit{
       (data: any) => {
         this.carritoService.agregarProducto(data);
         this.contadorCarritoService.aumentarContador();
-        console.log(this.carritoService.obtenerListaProductos());
       }, (error) => {
         console.log(error);
+        Swal.fire({
+          title: "Error al añadir el producto al carrito",
+          icon: "error",
+          timer: 2000, // Tiempo en milisegundos (en este caso, 3 segundos)
+          showConfirmButton: false, // Ocultar el botón de confirmación
+        })
       }
     )
   }
