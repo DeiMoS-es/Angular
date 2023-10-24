@@ -19,8 +19,6 @@ export class ProductoServiceService {
 
     // Verifica si el token existe
     if (token) {
-      console.log("Hay token");
-      console.log(token);
       // Agrega el token al encabezado de autorización
       const headers = new HttpHeaders({
         'Authorization': `Bearer ${token}`

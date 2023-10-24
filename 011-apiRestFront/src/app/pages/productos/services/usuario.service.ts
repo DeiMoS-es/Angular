@@ -9,7 +9,7 @@ export class UsuarioService {
   private baseUserURL = "http://localhost:8080/usuario";
 
   constructor(private httpClient: HttpClient) { }
-
+  
   public buscarUsuarioPorNombre(userName: string){
     const token = localStorage.getItem('token');
     if(token){

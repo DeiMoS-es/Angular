@@ -7,11 +7,11 @@ import { CarritoComponent } from './components/carrito/carrito.component';
 import { LoginComponent } from './pages/usuario/login/login.component';
 
 const routes: Routes = [
+  { path: '', component: LoginComponent, pathMatch: 'full'},
   //Rutas para productos
   { path: 'productos', component:ListarProductosComponent},
   //para ruta vacía
-  // { path: '', redirectTo:'productos', pathMatch: 'full'},
-  { path: '', component: LoginComponent, pathMatch: 'full'},
+  // { path: '', redirectTo:'productos', pathMatch: 'full'},  
   { path: 'crear', component: CrearProductoComponent}, //Ruta para crear un producto
   { path: 'editar-producto/:id', component: EditarProductosComponent }, // Ruta para la edición de productos
   { path: 'carrito', component: CarritoComponent},

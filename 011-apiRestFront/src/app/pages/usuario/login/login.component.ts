@@ -17,7 +17,10 @@ export class LoginComponent {
   formularioEnviado = false;
   userName: string;
   user:any;
-  constructor(private formBuilder: FormBuilder, private route: Router, private loginService: LoginService, private userService: UsuarioService) {
+  constructor(private formBuilder: FormBuilder, 
+              private route: Router, 
+              private loginService: LoginService, 
+              private userService: UsuarioService) {
     this.loginForm = this.formBuilder.group({
       userName: ["", [Validators.required, Validators.email]],
       password: ["", Validators.required]
@@ -49,6 +52,7 @@ export class LoginComponent {
         (response) => {
           if (response) {
             this.user = response;
+            this.isUserNameEmpty = true;
             console.log("Usuario:", this.user);
           } else {
             console.error("No se encontró un usuario válido.");

@@ -3,7 +3,9 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Producto } from 'src/app/pages/productos/entity/producto';
 import { ContadorCarritoService } from 'src/app/pages/productos/services/contador-carrito.service';
+import { LoginService } from 'src/app/pages/productos/services/login.service';
 import { ProductoServiceService } from 'src/app/pages/productos/services/producto.service';
+import { UsuarioService } from 'src/app/pages/productos/services/usuario.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -16,19 +18,30 @@ export class HeaderComponent {
   sugerencias: Producto[] = [];
   nombreProducto: string = '';
   usuarioIsLogin: boolean = false;
-
+  token: string | null;
   constructor(private formBuilder: FormBuilder, 
               private productoService: ProductoServiceService, 
-              private route: ActivatedRoute, 
+              private route: Router, 
               private contadorCarritoService: ContadorCarritoService,
-              ) {};
+              private loginService: LoginService,
+              private usuarioService: UsuarioService) {};
 
   obtenerContador() {
     // Puedes acceder a las propiedades o métodos del servicio aquí
     const contador = this.contadorCarritoService.getContadorProductos();
     return contador;
   }
-  
+  ngOnInit(): void {
+    console.log("Entro en header");
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this.token = this.loginService.getToken();
+    this.loginService.getLoginStatus().subscribe((status: boolean) => {
+      if (status) {
+        this.usuarioIsLogin = true;
+      }
+    });
+  }
   buscarEnTiempoReal(nombreProducto: string) {
     if (nombreProducto.length >= 1) {
       // Realiza la llamada al servicio para buscar productos en tiempo real
@@ -66,7 +79,13 @@ export class HeaderComponent {
       }
     );
   }
-  
+  // Cierra la sesión (elimina el token)
+  public logout(): void {
+    console.log("Hago click");
+    this.usuarioIsLogin = false;
+    this.loginService.logout();
+    this.route.navigateByUrl("/login");
+  }
   onSubmit() {
     const nombreProducto = this.nombreProducto;
     if (nombreProducto.trim() !== '') {
