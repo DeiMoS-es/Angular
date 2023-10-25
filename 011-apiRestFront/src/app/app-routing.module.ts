@@ -7,7 +7,7 @@ import { CarritoComponent } from './components/carrito/carrito.component';
 import { LoginComponent } from './pages/usuario/login/login.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent, pathMatch: 'full'},
+  { path: '', redirectTo: 'login', pathMatch: 'full'},
   //Rutas para productos
   { path: 'productos', component:ListarProductosComponent},
   //para ruta vacía

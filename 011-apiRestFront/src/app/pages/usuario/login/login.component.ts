@@ -25,8 +25,7 @@ export class LoginComponent {
       userName: ["", [Validators.required, Validators.email]],
       password: ["", Validators.required]
     });
-  }
-  
+  }  
 
   onSubmit() {
     this.formularioEnviado = true;
@@ -35,11 +34,9 @@ export class LoginComponent {
         switchMap((tokenData) => {
           const tokenObject = JSON.parse(JSON.stringify(tokenData));
           const tokenString = tokenObject.token;
-          console.log(tokenString);
+          // console.log(tokenString);
           localStorage.setItem('token', tokenString);
-  
-          const userName = this.loginForm.get('userName')?.value;
-          
+          const userName = this.loginForm.get('userName')?.value;          
           // Comprobamos si userName es una cadena no vacía
           if (typeof userName === 'string' && userName.trim() !== '') {
             return this.userService.buscarUsuarioPorNombre(userName) as Observable<Object>;

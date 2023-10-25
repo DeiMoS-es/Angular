@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd  } from '@angular/router';
 import { Producto } from 'src/app/pages/productos/entity/producto';
 import { ContadorCarritoService } from 'src/app/pages/productos/services/contador-carrito.service';
 import { LoginService } from 'src/app/pages/productos/services/login.service';
@@ -24,23 +24,26 @@ export class HeaderComponent {
               private route: Router, 
               private contadorCarritoService: ContadorCarritoService,
               private loginService: LoginService,
-              private usuarioService: UsuarioService) {};
+              private usuarioService: UsuarioService) {
+                route.events.subscribe((event) => {
+                  if (event instanceof NavigationEnd) {
+                    // Verificar si estamos en la página de login
+                    if (event.url === '/login') {
+                      this.usuarioIsLogin = false;
+                    } else {
+                      this.usuarioIsLogin = !!localStorage.getItem('token');
+                    }
+                  }
+                });
+              };
 
   obtenerContador() {
     // Puedes acceder a las propiedades o métodos del servicio aquí
     const contador = this.contadorCarritoService.getContadorProductos();
     return contador;
   }
+  
   ngOnInit(): void {
-    console.log("Entro en header");
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-    this.token = this.loginService.getToken();
-    this.loginService.getLoginStatus().subscribe((status: boolean) => {
-      if (status) {
-        this.usuarioIsLogin = true;
-      }
-    });
   }
   buscarEnTiempoReal(nombreProducto: string) {
     if (nombreProducto.length >= 1) {
