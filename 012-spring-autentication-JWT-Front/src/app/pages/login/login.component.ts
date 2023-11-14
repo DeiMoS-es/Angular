@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { switchMap, of, Observable } from 'rxjs';
+import { LoginService } from 'src/app/services/auth/login.service';
 
 @Component({
   selector: 'app-login',
@@ -13,16 +14,17 @@ export class LoginComponent {
     userName: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required]
   })
-  constructor(private formBuilder: FormBuilder, private router: Router){}
+  formularioEnviado = false;
+  constructor(private formBuilder: FormBuilder, private router: Router, private loginService: LoginService){}
 
   onSubmit(){
-    console.log(this.loginForm.value);
+    this.formularioEnviado = true;
     if(this.loginForm.valid){
-      console.log("Llamar al servicio de login");
+      this.loginService.login(this.loginForm.value);
       this.router.navigate(['/inicio']);
       this.loginForm.reset();//Restablecer el formulario
     }else{
-      alert("ERROR El formulario no es válido");
+      this.loginForm.markAllAsTouched();
     }
   }
 

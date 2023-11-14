@@ -2,7 +2,7 @@
         <div class="col-md-6 offset-md-3">
             <h2>Iniciar Sesión</h2>
             <!-- Mensaje de error -->
-            <div class="alert alert-danger" *ngIf=" ">
+            <div class="text-danger" *ngIf="formularioEnviado && loginForm.invalid">
                 Por favor, revisa los campos del formulario.
             </div>
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
@@ -16,10 +16,7 @@
                             </div>
                         </div>
                     </mat-form-field>
-                    <div *ngIf=""
-                        class="alert alert-danger">
-                        Nombre de usuario es requerido
-                    </div>
+                    <div *ngIf="loginForm.get('userName')?.invalid && loginForm.get('userName')?.touched" class="text-danger">Nombre de usuario es requerido</div>
                 </div>
                 <div class="form-group">
                     <mat-form-field class="custom-form-field full-width">
@@ -31,7 +28,7 @@
                             </div>
                         </div>                        
                     </mat-form-field>
-                    <div *ngIf=""class="alert alert-danger"> Contraseña es requerida</div>
+                    <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger"> Contraseña es requerida</div>
                 </div>
                 <button mat-raised-button color="primary" type="submit">Iniciar Sesión</button>
             </form>
