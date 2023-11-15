@@ -12,11 +12,11 @@
                             <mat-icon>person</mat-icon>
                             <div class="input-label-container">
                                 <mat-label>Nombre de Usuario</mat-label>
-                                <input matInput placeholder="Escribe tu nombre de usuario de tipo email" type="mail" formControlName="userName">
+                                <input matInput placeholder="Escribe tu nombre de usuario de tipo email" type="mail" formControlName="username">
                             </div>
                         </div>
                     </mat-form-field>
-                    <div *ngIf="loginForm.get('userName')?.invalid && loginForm.get('userName')?.touched" class="text-danger">Nombre de usuario es requerido</div>
+                    <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched" class="text-danger">Nombre de usuario es requerido</div>
                 </div>
                 <div class="form-group">
                     <mat-form-field class="custom-form-field full-width">

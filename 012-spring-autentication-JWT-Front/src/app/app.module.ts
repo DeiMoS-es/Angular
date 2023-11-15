@@ -10,6 +10,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { NavComponent } from './shared/nav/nav.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 //Angular Material
 import { MatCardModule } from '@angular/material/card';
@@ -39,7 +40,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatButtonModule,
     MatInputModule,
     MatExpansionModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
