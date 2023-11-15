@@ -41,10 +41,15 @@ export class LoginComponent {
             }else{
               return new Observable();
             }
-            // return of(tokenString); // Devuelve solo el token como un observable
           }),
           catchError(error => {
             console.error('Error durante la solicitud:', error);
+            Swal.fire({
+              title: "Usuario o contraseña incorrectos",
+              icon: "warning",
+              timer: 1000, // Tiempo en milisegundos (en este caso, 1 segundos)
+              showConfirmButton: false, // Ocultar el botón de confirmación
+            })
             throw error; // Propagar el error después de manejarlo
           })
         )
@@ -54,10 +59,9 @@ export class LoginComponent {
             error: (e) => console.error("No se encontró un usuario válido.", e),
             complete: () =>{
               Swal.fire({
-                // title: "Good job!",
                 text: "Logeado con éxito",
                 icon: "success",
-                timer: 1000, // Tiempo en milisegundos (en este caso, 3 segundos)
+                timer: 1000, // Tiempo en milisegundos (en este caso, 1 segundos)
                 showConfirmButton: false, // Ocultar el botón de confirmación
               });
               this.router.navigateByUrl("/inicio");
