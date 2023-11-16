@@ -1,3 +1,4 @@
 <app-nav></app-nav>
-<p *ngIf="!userLoginOn">Usuario NO autenticado</p>
-<p *ngIf="userLoginOn">Usuario Autenticado</p>
+<p *ngIf="!isLoggedIn">Usuario NO autenticado</p>
+<p>{{ isLoggedIn }}</p>
+<p *ngIf="isLoggedIn">Usuario Autenticado</p>

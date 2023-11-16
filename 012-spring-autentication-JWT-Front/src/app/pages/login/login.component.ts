@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { FormBuilder,  Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { switchMap, Observable } from 'rxjs';
+import { switchMap, Observable,EMPTY } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { LoginRequest } from 'src/app/interface/login-request';
 import { LoginService } from 'src/app/services/auth/login.service';
+import { SharedCommunicationService } from 'src/app/services/shared/shared-communication.service';
 import { UserService } from 'src/app/services/user/user.service';
 import Swal from 'sweetalert2';
 
@@ -24,7 +25,8 @@ export class LoginComponent {
     private formBuilder: FormBuilder,
     private router: Router,
     private loginService: LoginService,
-    private userService: UserService
+    private userService: UserService,
+    private sharedCommunicationService: SharedCommunicationService
   ) {}
 
   onSubmit() {
@@ -32,42 +34,50 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.loginService.login(this.loginForm.value as LoginRequest).pipe(
           switchMap((tokenData) => {
-            const tokenObject = JSON.parse(JSON.stringify(tokenData));
-            const tokenString = tokenObject.token;
+            const tokenString = tokenData.token;  
+            // Almacena el token de manera segura (por ejemplo, utilizando HttpOnly cookies)
             localStorage.setItem('token', tokenString);
+
             const userName = this.loginForm.get('username')?.value;
-            if(typeof userName ==='string' && userName.length > 0) {
+            if (typeof userName === 'string' && userName.length > 0) {
               return this.userService.buscarUsuarioNombre(userName);
-            }else{
-              return new Observable();
+            } else {
+              return EMPTY; // o of(null), según la sugerencia
             }
           }),
-          catchError(error => {
+          catchError((error) => {
             console.error('Error durante la solicitud:', error);
+            let errorMessage = 'Ocurrió un error durante el inicio de sesión.';
+
+            if (error.status === 401) {
+              errorMessage = 'Usuario o contraseña incorrectos.';
+            } else if (error.status === 403) {
+              errorMessage = 'Acceso no autorizado.';
+            } // Puedes agregar más casos según las necesidades
+
             Swal.fire({
-              title: "Usuario o contraseña incorrectos",
-              icon: "warning",
-              timer: 1000, // Tiempo en milisegundos (en este caso, 1 segundos)
-              showConfirmButton: false, // Ocultar el botón de confirmación
-            })
+              title: errorMessage,
+              icon: 'warning',
+              timer: 1000,
+              showConfirmButton: false,
+            });
             throw error; // Propagar el error después de manejarlo
           })
         )
-        .subscribe(
-          {
-            next: (response) => console.log(response),
-            error: (e) => console.error("No se encontró un usuario válido.", e),
-            complete: () =>{
-              Swal.fire({
-                text: "Logeado con éxito",
-                icon: "success",
-                timer: 1000, // Tiempo en milisegundos (en este caso, 1 segundos)
-                showConfirmButton: false, // Ocultar el botón de confirmación
-              });
-              this.router.navigateByUrl("/inicio");
-            } 
-          }
-        );
+        .subscribe({
+          next: (response) => console.log(response),
+          error: (e) => console.error('No se encontró un usuario válido.', e),
+          complete: () => {
+            Swal.fire({
+              text: 'Logeado con éxito',
+              icon: 'success',
+              timer: 1000, // Tiempo en milisegundos (en este caso, 1 segundos)
+              showConfirmButton: false, // Ocultar el botón de confirmación
+            });
+            this.sharedCommunicationService.updateLoginStatus(true);
+            this.router.navigateByUrl('/inicio');
+          },
+        });
     }
   }
 }
