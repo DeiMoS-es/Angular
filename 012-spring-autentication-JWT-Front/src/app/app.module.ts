@@ -10,7 +10,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { NavComponent } from './shared/nav/nav.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 //Angular Material
 import { MatCardModule } from '@angular/material/card';
@@ -19,6 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { JwtInterceptor } from './interceptores/auth/jwt.interceptor';
 //Fin Angular Material
 
 @NgModule({
@@ -43,7 +44,10 @@ import { MatExpansionModule } from '@angular/material/expansion';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    //interceptor
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

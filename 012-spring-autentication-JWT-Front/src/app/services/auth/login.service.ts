@@ -24,6 +24,7 @@ export class LoginService {
     // this.loginStatusSubject.next(true);
     return this.httpClient.post(`${this.baseURLLogin}/login`, credentials).pipe(
       tap( (userData) => {
+        console.log(userData);
         this.currentUserLoginOn.next(true);
       })
     )

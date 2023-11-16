@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 })
 export class NavComponent {
   isLoggedIn: boolean = false;//el usuario cuando inicia por primera vez no esta logueado
+  token: string | null = null;
   constructor(private loginService: LoginService){}
 
   ngOnInit(): void {
@@ -18,7 +19,8 @@ export class NavComponent {
           this.isLoggedIn = userLoginOn;
         }
       }
-    )
+    );
+    this.comprobarToken();
   }
 
   public cerrarSesion(): void {
@@ -29,5 +31,15 @@ export class NavComponent {
       showConfirmButton: false, // Ocultar el botón de confirmación
     });
     this.loginService.deleteToken();
+  }
+
+  public comprobarToken(): void{
+    this.token = this.loginService.getToken();
+    if(this.token){
+      this.isLoggedIn = true;
+    }else
+    {
+      this.isLoggedIn = false;
+    }
   }
 }

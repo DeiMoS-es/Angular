@@ -9,6 +9,7 @@ import { LoginService } from 'src/app/services/auth/login.service';
 })
 export class DashboardComponent {
   isLoggedIn: boolean = false;
+  token: string | null = null;
   
   constructor(private cdr: ChangeDetectorRef, private ngZone: NgZone, private loginService: LoginService){}
 
@@ -22,7 +23,17 @@ export class DashboardComponent {
           });
         }
       }
-    )
+    );
+      this.comprobarToken();    
   }
   
+  public comprobarToken(): void{
+    this.token = this.loginService.getToken();
+    if(this.token){
+      this.isLoggedIn = true;
+    }else
+    {
+      this.isLoggedIn = false;
+    }
+  }
 }

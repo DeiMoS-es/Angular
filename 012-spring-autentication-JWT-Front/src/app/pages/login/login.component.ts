@@ -35,6 +35,7 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.loginService.login(this.loginForm.value as LoginRequest).pipe(
           switchMap((tokenData) => {
+            console.log(tokenData);
             const tokenString = tokenData.token;  
             // Almacena el token de manera segura (por ejemplo, utilizando HttpOnly cookies)
             localStorage.setItem('token', tokenString);
