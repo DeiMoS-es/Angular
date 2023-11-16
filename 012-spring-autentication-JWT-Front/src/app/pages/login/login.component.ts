@@ -28,7 +28,7 @@ export class LoginComponent {
   ) {}
   ngOnInit(): void {
     console.log('Componente inicializado:', this.constructor.name);
-    // Resto del código...
+    
   }
   onSubmit() {
     this.formularioEnviado = true;

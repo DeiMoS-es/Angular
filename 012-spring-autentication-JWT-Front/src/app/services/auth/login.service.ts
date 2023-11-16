@@ -13,7 +13,7 @@ export class LoginService {
   private baseURLLogin = "http://localhost:8080/auth";
 
   currentUserLoginOn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  currentUserData: BehaviorSubject<any> = new BehaviorSubject<any>('764872647821');//recibiriá el token que es lo que me devuelve la api
+  //currentUserData: BehaviorSubject<any> = new BehaviorSubject<any>('764872647821');//recibiriá el token que es lo que me devuelve la api
 
   constructor(private httpClient: HttpClient) { }
 
@@ -31,8 +31,20 @@ export class LoginService {
 
   // Método para obtener el token almacenado
   public getToken(): string | null {
+    this.token = localStorage.getItem('token');
     return this.token;
   }
+  
+  //Método para eliminar el token y cerrar la sesión
+  public deleteToken():void{
+    //obtener el token del localstorage
+    this.token = localStorage.getItem('token');
+    //eliminar el token del localstorage
+    localStorage.removeItem('token');
+    //this.loginStatusSubject.next(false);
+    this.currentUserLoginOn.next(false);
+  }
+
  //Si quisiera maneja los posibles errores, pero como ya lo manejo en el componente no sería necesario
   private handleError(error:HttpErrorResponse){
     if(error.status === 0){

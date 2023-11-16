@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LoginService } from 'src/app/services/auth/login.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-nav',
@@ -18,5 +19,15 @@ export class NavComponent {
         }
       }
     )
+  }
+
+  public cerrarSesion(): void {
+    Swal.fire({
+      text: 'Sesión cerrada',
+      icon: 'error',
+      timer: 1000, // Tiempo en milisegundos (en este caso, 1 segundos)
+      showConfirmButton: false, // Ocultar el botón de confirmación
+    });
+    this.loginService.deleteToken();
   }
 }
