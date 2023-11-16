@@ -9,10 +9,10 @@
           <li class="nav-item">
             <a class="nav-link active" routerLink="/inicio">Portfolio</a>
           </li>
-          <li *ngIf="!userLoginOn" class="nav-item">
+          <li *ngIf="!isLoggedIn" class="nav-item">
             <a class="nav-link" routerLink="/iniciar-sesion">Iniciar Sesión</a>
           </li>
-          <li *ngIf="userLoginOn" class="nav-item">
+          <li *ngIf="isLoggedIn" class="nav-item">
             <a class="nav-link" routerLink="/inicio">Cerrar Sesión</a>
           </li>
         </ul>

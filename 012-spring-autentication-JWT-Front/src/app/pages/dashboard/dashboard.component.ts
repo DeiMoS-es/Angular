@@ -1,5 +1,5 @@
 import { Component, ChangeDetectorRef, NgZone } from '@angular/core';
-import { SharedCommunicationService } from 'src/app/services/shared/shared-communication.service';
+import { LoginService } from 'src/app/services/auth/login.service';
 
 
 @Component({
@@ -9,20 +9,20 @@ import { SharedCommunicationService } from 'src/app/services/shared/shared-commu
 })
 export class DashboardComponent {
   isLoggedIn: boolean = false;
-  constructor(private sharedCommunicationService: SharedCommunicationService, private cdr: ChangeDetectorRef, private ngZone: NgZone){}
+  
+  constructor(private cdr: ChangeDetectorRef, private ngZone: NgZone, private loginService: LoginService){}
 
   ngOnInit(): void {
-    console.log('Componente inicializado');
-
-    this.sharedCommunicationService.loginStatus$.subscribe((status) => {
-      console.log('Actualización de estado recibida:', status);
-      
-      this.ngZone.run(() => {
-        this.isLoggedIn = status;
-        console.log('isLoggedIn actualizado:', this.isLoggedIn);
-        this.cdr.detectChanges();
-      });
-    });
+    this.loginService.currentUserLoginOn.subscribe(
+      {
+        next:(userLoginOn) => {
+          this.isLoggedIn = userLoginOn;
+          this.ngZone.run(() => {
+            this.cdr.detectChanges();
+          });
+        }
+      }
+    )
   }
-
+  
 }

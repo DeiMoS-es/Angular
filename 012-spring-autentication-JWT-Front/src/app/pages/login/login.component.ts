@@ -5,7 +5,6 @@ import { switchMap, Observable,EMPTY } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { LoginRequest } from 'src/app/interface/login-request';
 import { LoginService } from 'src/app/services/auth/login.service';
-import { SharedCommunicationService } from 'src/app/services/shared/shared-communication.service';
 import { UserService } from 'src/app/services/user/user.service';
 import Swal from 'sweetalert2';
 
@@ -25,10 +24,12 @@ export class LoginComponent {
     private formBuilder: FormBuilder,
     private router: Router,
     private loginService: LoginService,
-    private userService: UserService,
-    private sharedCommunicationService: SharedCommunicationService
+    private userService: UserService
   ) {}
-
+  ngOnInit(): void {
+    console.log('Componente inicializado:', this.constructor.name);
+    // Resto del código...
+  }
   onSubmit() {
     this.formularioEnviado = true;
     if (this.loginForm.valid) {
@@ -37,7 +38,6 @@ export class LoginComponent {
             const tokenString = tokenData.token;  
             // Almacena el token de manera segura (por ejemplo, utilizando HttpOnly cookies)
             localStorage.setItem('token', tokenString);
-
             const userName = this.loginForm.get('username')?.value;
             if (typeof userName === 'string' && userName.length > 0) {
               return this.userService.buscarUsuarioNombre(userName);
@@ -74,10 +74,12 @@ export class LoginComponent {
               timer: 1000, // Tiempo en milisegundos (en este caso, 1 segundos)
               showConfirmButton: false, // Ocultar el botón de confirmación
             });
-            this.sharedCommunicationService.updateLoginStatus(true);
             this.router.navigateByUrl('/inicio');
+            this.loginForm.reset();
           },
         });
+    } else{
+      this.loginForm.markAllAsTouched();
     }
   }
 }
