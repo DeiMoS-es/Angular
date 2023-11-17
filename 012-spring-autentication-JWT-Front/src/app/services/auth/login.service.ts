@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { LoginRequest } from 'src/app/interface/login-request';
 import { Observable, throwError, BehaviorSubject, tap } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { User } from 'src/app/interface/user';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,11 @@ export class LoginService {
         this.currentUserLoginOn.next(true);
       })
     )
+  }
+
+  public registerUser(userData: User){
+    console.log(userData);
+    return this.httpClient.post(`${this.baseURLLogin}/register`, userData)
   }
 
   // Método para obtener el token almacenado
