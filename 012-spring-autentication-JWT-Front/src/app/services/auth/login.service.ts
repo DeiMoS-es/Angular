@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LoginRequest } from 'src/app/interface/login-request';
-import { Observable, Subject, throwError, BehaviorSubject, tap } from 'rxjs';
+import { Observable, throwError, BehaviorSubject, tap } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +12,7 @@ export class LoginService {
   private baseURLLogin = "http://localhost:8080/auth";
 
   currentUserLoginOn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  //currentUserData: BehaviorSubject<any> = new BehaviorSubject<any>('764872647821');//recibiriá el token que es lo que me devuelve la api
+  // currentUserData: BehaviorSubject<User> = new BehaviorSubject<any>('764872647821');//recibiriá el token que es lo que me devuelve la api
 
   constructor(private httpClient: HttpClient) { }
 
@@ -24,7 +23,6 @@ export class LoginService {
     // this.loginStatusSubject.next(true);
     return this.httpClient.post(`${this.baseURLLogin}/login`, credentials).pipe(
       tap( (userData) => {
-        console.log(userData);
         this.currentUserLoginOn.next(true);
       })
     )

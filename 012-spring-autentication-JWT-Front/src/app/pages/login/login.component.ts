@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { switchMap, Observable,EMPTY } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { LoginRequest } from 'src/app/interface/login-request';
+import { User } from 'src/app/interface/user';
 import { LoginService } from 'src/app/services/auth/login.service';
 import { UserService } from 'src/app/services/user/user.service';
 import Swal from 'sweetalert2';
@@ -20,6 +21,8 @@ export class LoginComponent {
     password: ['', Validators.required],
   });
   formularioEnviado = false;
+  userData: User;
+
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -66,7 +69,13 @@ export class LoginComponent {
           })
         )
         .subscribe({
-          next: (response) => console.log(response),
+          next: (response) => {
+            this.userData = response;
+            this.userData.token = this.loginService.getToken() || '';
+            console.log(this.userData);
+            this.userService.updateUserInfo(this.userData);
+            this.userService.setUserData(this.userData);
+            },
           error: (e) => console.error('No se encontró un usuario válido.', e),
           complete: () => {
             Swal.fire({

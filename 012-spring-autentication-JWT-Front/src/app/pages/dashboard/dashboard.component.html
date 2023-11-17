@@ -1,4 +1,9 @@
 <app-nav></app-nav>
-<p *ngIf="!isLoggedIn">Usuario NO autenticado</p>
+<section *ngIf="isLoggedIn">
+    <h2>Bienvenido, {{userData?.firstname}} {{userData?.lastname}} </h2>
+    <p>País: {{userData?.country}}</p>
+</section>
+<section *ngIf="!isLoggedIn">
+    <p>Por favor, inica sesión para ver la información del usuario.</p>
+</section>
 
-<p *ngIf="isLoggedIn">Usuario Autenticado</p>
