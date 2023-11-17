@@ -20,6 +20,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { JwtInterceptor } from './interceptores/auth/jwt.interceptor';
+import { NewUserComponent } from './pages/new-user/new-user.component';
 //Fin Angular Material
 
 @NgModule({
@@ -29,7 +30,8 @@ import { JwtInterceptor } from './interceptores/auth/jwt.interceptor';
     FooterComponent,
     DashboardComponent,
     LoginComponent,
-    NavComponent
+    NavComponent,
+    NewUserComponent
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,11 @@
 <app-nav></app-nav>
-<section *ngIf="isLoggedIn">
-    <h2>Bienvenido, {{userData?.firstname}} {{userData?.lastname}} </h2>
-    <p>País: {{userData?.country}}</p>
-</section>
-<section *ngIf="!isLoggedIn">
-    <p>Por favor, inica sesión para ver la información del usuario.</p>
-</section>
-
+<main class="container mt-2 d-flex justify-content-center align-items-center">
+    <section *ngIf="isLoggedIn" class="text-center">
+        <h2>Bienvenido, {{userData?.firstname}} {{userData?.lastname}} </h2>
+        <p>País: {{userData?.country}}</p>
+    </section>
+    <section *ngIf="!isLoggedIn" class="text-center">
+        <p>Por favor, inica sesión para ver la información del usuario.</p>
+        <p>O date de alta con nosotros <a routerLink="/registrar">Registrar</a></p>
+    </section>
+</main>

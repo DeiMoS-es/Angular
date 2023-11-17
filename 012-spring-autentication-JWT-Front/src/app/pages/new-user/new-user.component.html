@@ -1,0 +1,71 @@
+<section class="container">
+    <div class="col-md-6 offset-md-3">
+        <h2>Registro de Usuario</h2>
+        <!-- Mensaje de error -->
+        <div class="text-danger" *ngIf="formularioEnviado && registerForm.invalid">
+            Por favor, revisa los campos del formulario.
+        </div>
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <!-- username tipo email-->
+            <div class="form-group">
+                <mat-form-field class="custom-form-field full-width">
+                    <div class="icon-label-container">
+                        <mat-icon>mail</mat-icon>
+                        <div class="input-label-container">
+                            <mat-label>Nombre de Usuario</mat-label>
+                            <input matInput placeholder="Escribe tu nombre de usuario de tipo email" type="mail" formControlName="username">
+                        </div>
+                    </div>                    
+                </mat-form-field>
+                <div *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched" class="text-danger">Nombre de usuario es requerido</div>
+            </div>
+            <!-- contraseña -->
+            <div class="form-group">
+                <mat-form-field class="custom-form-field full-width">
+                    <div class="icon-label-container">
+                        <mat-icon>vpn_key</mat-icon>
+                        <div class="input-label-container">
+                            <mat-label>Contraseña de Usuario</mat-label>
+                            <input matInput placeholder="Escribe tu contraseña de usuario" formControlName="password" type="password">
+                        </div>
+                    </div>
+                    
+                </mat-form-field>
+                <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="text-danger"> Contraseña es requerida</div>
+            </div>
+            <!-- Nombre persona -->
+            <div class="form-group">
+                <mat-form-field class="custom-form-field full-width">
+                    <div class="icon-label-container">
+                        <mat-icon>account_circle</mat-icon>
+                        <div class="input-label-container">
+                            <mat-label>Nombre</mat-label>
+                            <input matInput placeholder="Escribe tu nombre" formControlName="firstname">
+                        </div>
+                    </div>                    
+                </mat-form-field>
+                <div *ngIf="registerForm.get('firstname')?.invalid && registerForm.get('firstname')?.touched" class="text-danger"> Nombre es requerido</div>
+            </div>
+            <!-- Apellido -->
+            <div class="form-group">
+                <mat-form-field class="custom-form-field full-width">
+                    <mat-label>Apellido</mat-label>
+                    <input matInput placeholder="Escribe tu apellido" formControlName="lastname">
+                </mat-form-field>
+                <div *ngIf="registerForm.get('lastname')?.invalid && registerForm.get('lastname')?.touched" class="text-danger"> Apellido es requerido</div>
+            </div>
+            <!-- País -->
+            <div class="form-group">
+                <mat-form-field class="custom-form-field full-width">
+                    <mat-label>País</mat-label>
+                    <input matInput placeholder="Escribe tu país" formControlName="country">
+                </mat-form-field>
+                <div *ngIf="registerForm.get('country')?.invalid && registerForm.get('country')?.touched" class="text-danger"> País es requerido</div>
+            </div>
+            <div class="text-center">
+                <button mat-raised-button color="primary" type="submit">Registrarse</button>
+                <button mat-raised-button color="warn" type="button" (click)="limpiarFormulario()">Limpiar</button>
+            </div>
+        </form>
+    </div>
+</section>
