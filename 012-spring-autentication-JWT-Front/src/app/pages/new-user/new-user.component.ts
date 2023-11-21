@@ -29,10 +29,7 @@ export class NewUserComponent implements OnInit {
   onSubmit() {
     this.formularioEnviado = true;
     if (this.registerForm.valid) {
-      // Aquí puedes hacer algo con los datos, como enviarlos al backend
-      console.log('Datos del nuevo usuario:', this.registerForm.value);
       this.loginService.registerUser(this.registerForm.value).subscribe({
-        //TODO mejorar el subscribe para usarlo de forma actual
         next: () => {},
         error: (e) => console.error('Ha ocurrido un error: ', e),
         complete: () => {

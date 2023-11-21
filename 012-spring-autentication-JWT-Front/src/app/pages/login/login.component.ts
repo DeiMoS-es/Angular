@@ -29,16 +29,13 @@ export class LoginComponent {
     private loginService: LoginService,
     private userService: UserService
   ) {}
-  ngOnInit(): void {
-    console.log('Componente inicializado:', this.constructor.name);
-    
+  ngOnInit(): void {    
   }
   onSubmit() {
     this.formularioEnviado = true;
     if (this.loginForm.valid) {
       this.loginService.login(this.loginForm.value as LoginRequest).pipe(
           switchMap((tokenData) => {
-            console.log(tokenData);
             const tokenString = tokenData.token;  
             // Almacena el token de manera segura (por ejemplo, utilizando HttpOnly cookies)
             localStorage.setItem('token', tokenString);
@@ -50,15 +47,12 @@ export class LoginComponent {
             }
           }),
           catchError((error) => {
-            console.error('Error durante la solicitud:', error);
             let errorMessage = 'Ocurrió un error durante el inicio de sesión.';
-
             if (error.status === 401) {
               errorMessage = 'Usuario o contraseña incorrectos.';
             } else if (error.status === 403) {
               errorMessage = 'Acceso no autorizado.';
-            } // Puedes agregar más casos según las necesidades
-
+            }
             Swal.fire({
               title: errorMessage,
               icon: 'warning',

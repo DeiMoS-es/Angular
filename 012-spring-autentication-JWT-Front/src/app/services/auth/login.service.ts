@@ -13,15 +13,10 @@ export class LoginService {
   private baseURLLogin = "http://localhost:8080/auth";
 
   currentUserLoginOn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  // currentUserData: BehaviorSubject<User> = new BehaviorSubject<any>('764872647821');//recibiriá el token que es lo que me devuelve la api
 
   constructor(private httpClient: HttpClient) { }
 
-  // private loginStatusSubject = new Subject<boolean>();
-
   public login(credentials: LoginRequest): Observable<any> {
-    console.log(credentials);
-    // this.loginStatusSubject.next(true);
     return this.httpClient.post(`${this.baseURLLogin}/login`, credentials).pipe(
       tap( (userData) => {
         this.currentUserLoginOn.next(true);
@@ -30,7 +25,6 @@ export class LoginService {
   }
 
   public registerUser(userData: User){
-    console.log(userData);
     return this.httpClient.post(`${this.baseURLLogin}/register`, userData)
   }
 

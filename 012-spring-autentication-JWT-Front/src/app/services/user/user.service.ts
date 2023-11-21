@@ -13,8 +13,7 @@ export class UserService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public buscarUsuarioNombre(username: string): Observable<any> {
-    console.log(username);    
+  public buscarUsuarioNombre(username: string): Observable<any> { 
     return this.httpClient.get(`${this.baseURLUser}/buscarUsuarioNombre/${username}`);     
   }
 
