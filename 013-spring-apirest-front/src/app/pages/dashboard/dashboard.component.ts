@@ -21,19 +21,23 @@ export class DashboardComponent implements OnInit {
   private obtenerProductos(){
     this.productoService.obtenerProductos().subscribe(dato => {
       this.productos = dato;
-      console.log(this.productos);
     })
   }
 
-  public verProducto(producto: any) {
+  public verProducto(idPRoducto: number) {
     // Lógica para ver el producto
+    console.log(idPRoducto);
   }
 
-  public editarProducto(producto: any) {
+  public editarProducto(idPRoducto: number) {
     // Lógica para editar el producto
   }
 
-  public eliminarProducto(producto: any) {
-    // Lógica para eliminar el producto
+  public eliminarProducto(idPRoducto: number) {
+    this.productoService.eliminarProducto(idPRoducto).subscribe({
+      // next:() =>{console.log("Next");},
+      error:(err) =>{console.log("Error: ", err);},
+      complete:() =>{console.log("Complete"); this.obtenerProductos();}
+    });
   }
 }

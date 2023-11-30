@@ -15,4 +15,8 @@ export class ProductoService {
   public obtenerProductos():Observable<Producto[]>{
     return this.httpClient.get<Producto[]>(`${this.baseUrl}/listarProductos`);
   };
+
+  public eliminarProducto(idProducto: number){
+    return this.httpClient.delete(`${this.baseUrl}/eliminar/${idProducto}`);
+  }
 }
