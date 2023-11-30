@@ -1,0 +1,16 @@
+/* Estilo para filas pares (fondo blanco) */
+.mat-row.mat-row:nth-child(even) {
+    background-color: #fff;
+  }
+  
+  /* Estilo para filas impares (fondo gris claro) */
+  .mat-row.mat-row:nth-child(odd) {
+    background-color: #f5f5f5;
+  }
+
+  .mat-accent-custom {
+    color: #e2cd13; /* Amarillo */
+    /* color: #000; Texto oscuro para contraste */
+  }
+  
+  

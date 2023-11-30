@@ -9,7 +9,12 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { GuardarProductoComponent } from './pages/guardar-producto/guardar-producto.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavBarComponent } from './shared/nav-bar/nav-bar.component';
+import { HttpClientModule } from '@angular/common/http';
 
+// Angular Material
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +27,11 @@ import { NavBarComponent } from './shared/nav-bar/nav-bar.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule,
+    MatTableModule,
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
