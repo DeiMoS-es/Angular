@@ -10,6 +10,7 @@ import { GuardarProductoComponent } from './pages/guardar-producto/guardar-produ
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavBarComponent } from './shared/nav-bar/nav-bar.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Angular Material
 import { MatTableModule } from '@angular/material/table';
@@ -31,7 +32,9 @@ import { MatButtonModule } from '@angular/material/button';
     HttpClientModule,
     MatTableModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    FormsModule, 
+    ReactiveFormsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

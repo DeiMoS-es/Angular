@@ -40,4 +40,5 @@ export class DashboardComponent implements OnInit {
       complete:() =>{console.log("Complete"); this.obtenerProductos();}
     });
   }
+
 }

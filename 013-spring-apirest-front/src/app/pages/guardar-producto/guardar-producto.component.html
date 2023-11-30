@@ -1,1 +1,49 @@
-<p>guardar-producto works!</p>
+<main class="container">
+    <section class="row">
+        <div class="col-md-6 offset-md-3">
+            <h2>Crear Producto</h2>
+            <p class="alert alert-danger" *ngIf="formularioEnviado && productoForm.invalid">Por favor, revisa los campos del formulario</p>
+            <form [formGroup]="productoForm" (ngSubmit)="onSubmit()">
+                <article class="form-group">
+                    <label for="nombreProducto">Nombre del producto</label>
+                    <input type="text" class="form-control" id="nombreProducto" formControlName="nombreProducto">
+                    <div *ngIf="productoForm.get('nombreProducto')?.invalid && productoForm.get('nombreProducto')?.touched">
+                        <p class="alert alert-danger">El nombre introducido no tiene el formato correcto</p>
+                    </div>
+                </article>
+                <article class="form-group">
+                    <label for="descripcionProducto">Descripción del producto</label>
+                    <input type="text" class="form-control" id="descripcionProducto" formControlName="descripcionProducto">
+                    <div *ngIf="productoForm.get('descripcionProducto')?.invalid && productoForm.get('descripcionProducto')?.touched">
+                        <p class="alert alert-danger">La descripción introducida no tiene el formato correcto</p>
+                    </div>
+                </article>
+                <article class="form-group">
+                    <label for="precioProducto">Precio del producto</label>
+                    <input type="number" class="form-control" id="precioProducto" formControlName="precioProducto">
+                    <div *ngIf="productoForm.get('precioProducto')?.invalid && productoForm.get('precioProducto')?.touched">
+                        <p class="alert alert-danger">El precio introducido no tiene el formato correcto</p>
+                    </div>
+                </article>
+                <article class="form-group">
+                    <label for="stockProducto">Stock del producto</label>
+                    <input type="number" class="form-control" id="stockProducto" formControlName="stockProducto">
+                    <div *ngIf="productoForm.get('stockProducto')?.invalid && productoForm.get('stockProducto')?.touched">
+                        <p class="alert alert-danger">El stock introducido no tiene el formato correcto</p>
+                    </div>
+                </article>
+                <article class="form-group">
+                    <label for="tipoProducto">Tipo del producto</label>
+                    <input type="text" class="form-control" id="tipoProducto" formControlName="tipoProducto">
+                    <div *ngIf="productoForm.get('tipoProducto')?.invalid && productoForm.get('tipoProducto')?.touched">
+                        <p class="alert alert-danger">El tipo introducido no tiene el formato correcto</p>
+                    </div>
+                </article>
+                <div class="text-center mt-2">
+                    <button mat-raised-button color="primary" type="submit">Guardar</button>
+                    <button mat-raised-button color="warn" type="button" (click)="limpiarFormulario()">Limpiar</button>
+                </div>
+            </form>
+        </div>
+    </section>
+</main>

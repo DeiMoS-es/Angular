@@ -19,4 +19,8 @@ export class ProductoService {
   public eliminarProducto(idProducto: number){
     return this.httpClient.delete(`${this.baseUrl}/eliminar/${idProducto}`);
   }
+
+  public guardarProducto(producto: Producto){
+    return this.httpClient.post(`${this.baseUrl}/guardar`, producto);
+  }
 }
