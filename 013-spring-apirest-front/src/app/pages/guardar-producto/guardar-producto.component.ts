@@ -25,18 +25,6 @@ export class GuardarProductoComponent implements OnInit{
       tipoProducto: ['', [Validators.required]]
     })
   };
-  /**
-   * ngOnInit(): void {
-  this.productoForm = this.formBuilder.group({
-    nombreProducto: ['', Validators.required],
-    descripcionProducto: ['', [Validators.required, Validators.maxLength(100)]],
-    precioProducto: ['', [Validators.required, Validators.pattern(/^\d+(\.\d+)?$/)]],
-    stockProducto: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
-    tipoProducto: ['', Validators.required]
-  });
-}
-
-   */
 
   public onSubmit(){
     this.formularioEnviado = true;
