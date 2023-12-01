@@ -14,7 +14,7 @@ export class GuardarProductoComponent implements OnInit{
   productoForm: FormGroup;
   formularioEnviado = false;
 
-  constructor(private porductoService: ProductoService, private formBuilder: FormBuilder){}
+  constructor(private porductoService: ProductoService, private formBuilder: FormBuilder, private route: Router){}
 
   ngOnInit(): void {
     this.productoForm = this.formBuilder.group({
@@ -40,7 +40,8 @@ export class GuardarProductoComponent implements OnInit{
             icon: "success",
             timer: 2000, // Tiempo en milisegundos (en este caso, 3 segundos)
             showConfirmButton: false, // Ocultar el botón de confirmación
-          })
+          });
+          this.route.navigate(['dashboard']);
         }
       })
     }
