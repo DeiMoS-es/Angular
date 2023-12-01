@@ -2,7 +2,7 @@
     <section class="row">
         <div class="col-md-6 offset-md-3">
             <h2>Crear Producto</h2>
-            <p class="alert alert-danger" *ngIf="formularioEnviado && productoForm.invalid">Por favor, revisa los campos del formulario</p>
+            <p class="text-danger" *ngIf="formularioEnviado && productoForm.invalid">Por favor, revisa los campos del formulario</p>
             <form [formGroup]="productoForm" (ngSubmit)="onSubmit()">
                 <article class="form-group">
                     <label for="nombreProducto">Nombre del producto</label>

@@ -32,7 +32,15 @@ export class GuardarProductoComponent implements OnInit{
       console.log(this.productoForm.value);
       this.porductoService.guardarProducto(this.productoForm.value).subscribe({
         next:(data) =>{console.log(data);},
-        error:(err) =>{console.log("Error: ", err);},
+        error:(err) =>{
+          console.log("Error: ", err);
+          Swal.fire({
+            title: "Error al crear el producto",
+            icon: "error",
+            timer: 2000, // Tiempo en milisegundos (en este caso, 3 segundos)
+            showConfirmButton: false, // Ocultar el botón de confirmación
+          })
+        },
         complete:() =>{
           console.log("Complete");
           Swal.fire({
@@ -44,6 +52,8 @@ export class GuardarProductoComponent implements OnInit{
           this.route.navigate(['dashboard']);
         }
       })
+    } else{
+      this.productoForm.markAllAsTouched();
     }
   };
 
