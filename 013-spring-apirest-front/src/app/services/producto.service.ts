@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable,Subject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Producto } from '../interface/producto';
+import { SharedServiceService } from './shared-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class ProductoService {
   //URLS
   private baseUrl = 'http://localhost:8080/productos';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private sharedService: SharedServiceService) { }
 
   public obtenerProductos():Observable<Producto[]>{
     return this.httpClient.get<Producto[]>(`${this.baseUrl}/listarProductos`);
@@ -30,5 +31,13 @@ export class ProductoService {
 
   public obternerProductoId(idProducto: number){
     return this.httpClient.get<Producto>(`${this.baseUrl}/buscar/${idProducto}`);
+  }
+
+  public busquedaEnTiempoReal(nombreProducto: string): Observable<Producto[]>{
+    return this.httpClient.get<Producto[]>(`${this.baseUrl}/buscarEnTiempoReal/${nombreProducto}`);
+  }
+
+  public actualizarProductoSeleccionado(producto: Producto){
+    this.sharedService.actualizarProductoSeleccionado(producto);
   }
 }

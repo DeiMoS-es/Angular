@@ -51,28 +51,28 @@
   </table>
 </div>
 <div class="center-container">
-<mat-card class="example-card" *ngIf="productoSeleccionado">
-  <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>{{productoSeleccionado.nombreProducto}}</mat-card-title>
-    <mat-card-subtitle>{{productoSeleccionado.tipoProducto}}</mat-card-subtitle>
-  </mat-card-header>
-  <!-- TODO agregar imagen producto cuando la tenga -->
-  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-  <mat-card-content>
-    <p>
-      Descripcion: {{productoSeleccionado.descripcionProducto}}
-    </p>
-    <p>
-      Stock: {{productoSeleccionado.stockProducto}}
-    </p>
-    <p>
-      Precio: {{productoSeleccionado.precioProducto}}
-    </p>
-  </mat-card-content>
-  <mat-card-actions class="text-center mx-auto">
-    <!-- <button class="text-center mat-primary" mat-icon-button (click)="cerrarDetalles()">Volver</button> -->
-    <button mat-button class="mat-primary" color="primary" (click)="cerrarDetalles()">Volver</button>
-  </mat-card-actions>
-</mat-card>
+  <mat-card class="example-card" *ngIf="productoSeleccionado">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{productoSeleccionado.nombreProducto}}</mat-card-title>
+      <mat-card-subtitle>{{productoSeleccionado.tipoProducto}}</mat-card-subtitle>
+    </mat-card-header>
+    <!-- TODO agregar imagen producto cuando la tenga -->
+    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+    <mat-card-content>
+      <p>
+        Descripcion: {{productoSeleccionado.descripcionProducto}}
+      </p>
+      <p>
+        Stock: {{productoSeleccionado.stockProducto}}
+      </p>
+      <p>
+        Precio: {{productoSeleccionado.precioProducto}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions class="text-center mx-auto">
+      <!-- <button class="text-center mat-primary" mat-icon-button (click)="cerrarDetalles()">Volver</button> -->
+      <button mat-button class="mat-primary" color="primary" (click)="cerrarDetalles()">Volver</button>
+    </mat-card-actions>
+  </mat-card>
 </div>

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { Producto } from 'src/app/interface/producto';
 import { ProductoService } from 'src/app/services/producto.service';
+import { SharedServiceService } from 'src/app/services/shared-service.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,10 +15,13 @@ export class DashboardComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nombre', 'descripcion', 'precio', 'stock', 'tipo', 'acciones'];
   productoSeleccionado: Producto | null = null;
 
-  constructor(private productoService: ProductoService, private router: Router) {}
+  constructor(private productoService: ProductoService, private router: Router, private sharedService: SharedServiceService) {}
 
   ngOnInit(): void {
     this.obtenerProductos();
+    this.sharedService.productoSeleccionado$.subscribe(
+        (product) => this.productoSeleccionado = product
+      )
   }
 
   private obtenerProductos(){
@@ -54,4 +58,5 @@ export class DashboardComponent implements OnInit {
   public cerrarDetalles(){
     this.productoSeleccionado = null;
   }
+
 }

@@ -11,22 +11,25 @@
   .mat-accent-custom {
     color: #e2cd13; /* Amarillo */
     /* color: #000; Texto oscuro para contraste */
-  }
-  
-  .example-card {
-    max-width: 400px;
-  }
+  } 
 
   /* TODO cambiar el backgorund-image por la foto del producto cuando la tenga */
   .example-header-image {
     background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
     background-size: cover;
   }
-
   .center-container {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 0vh; 
-    background-color: #f0f0f0; /* Añade un fondo opcional */
   }
+  .center-container img{
+    height: 17rem;
+  }
+  .example-card {
+    position: absolute;
+    margin-bottom: 36vh;
+    z-index: 1; /* Asegurarse de que la tarjeta aparezca sobre la lista */   
+  }
+  
