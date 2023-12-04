@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Producto } from 'src/app/interface/producto';
 import { ProductoService } from 'src/app/services/producto.service';
 
@@ -12,7 +13,7 @@ export class DashboardComponent implements OnInit {
   productos: Producto[];
   displayedColumns: string[] = ['id', 'nombre', 'descripcion', 'precio', 'stock', 'tipo', 'acciones'];
 
-  constructor(private productoService: ProductoService) {}
+  constructor(private productoService: ProductoService, private router: Router) {}
 
   ngOnInit(): void {
     this.obtenerProductos();
@@ -30,7 +31,8 @@ export class DashboardComponent implements OnInit {
   }
 
   public editarProducto(idPRoducto: number) {
-    // Lógica para editar el producto
+    console.log(idPRoducto);
+    this.router.navigate(['/editar-producto', idPRoducto]);
   }
 
   public eliminarProducto(idPRoducto: number) {

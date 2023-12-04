@@ -16,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { EditarProductoComponent } from './pages/editar-producto/editar-producto.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +24,8 @@ import { MatButtonModule } from '@angular/material/button';
     FooterComponent,
     DashboardComponent,
     GuardarProductoComponent,
-    NavBarComponent
+    NavBarComponent,
+    EditarProductoComponent
   ],
   imports: [
     BrowserModule,

@@ -23,4 +23,12 @@ export class ProductoService {
   public guardarProducto(producto: Producto){
     return this.httpClient.post(`${this.baseUrl}/guardar`, producto);
   }
+
+  public editarProducto(idProducto: number, producto: Producto){
+    return this.httpClient.put(`${this.baseUrl}/editar/${idProducto}`, producto);
+  }
+
+  public obternerProductoId(idProducto: number){
+    return this.httpClient.get<Producto>(`${this.baseUrl}/buscar/${idProducto}`);
+  }
 }
