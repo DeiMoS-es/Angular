@@ -13,4 +13,20 @@
     /* color: #000; Texto oscuro para contraste */
   }
   
-  
+  .example-card {
+    max-width: 400px;
+  }
+
+  /* TODO cambiar el backgorund-image por la foto del producto cuando la tenga */
+  .example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
+
+  .center-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 0vh; 
+    background-color: #f0f0f0; /* Añade un fondo opcional */
+  }

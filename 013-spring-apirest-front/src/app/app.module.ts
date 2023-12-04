@@ -11,12 +11,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavBarComponent } from './shared/nav-bar/nav-bar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EditarProductoComponent } from './pages/editar-producto/editar-producto.component';
 
 // Angular Material
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { EditarProductoComponent } from './pages/editar-producto/editar-producto.component';
+import { MatCardModule } from '@angular/material/card';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +27,7 @@ import { EditarProductoComponent } from './pages/editar-producto/editar-producto
     DashboardComponent,
     GuardarProductoComponent,
     NavBarComponent,
-    EditarProductoComponent
+    EditarProductoComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +38,8 @@ import { EditarProductoComponent } from './pages/editar-producto/editar-producto
     MatIconModule,
     MatButtonModule,
     FormsModule, 
-    ReactiveFormsModule 
+    ReactiveFormsModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
