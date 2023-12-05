@@ -39,6 +39,13 @@
                         <p class="alert alert-danger">El tipo introducido no tiene el formato correcto</p>
                     </div>
                 </article>
+                <article class="form-group">
+                    <label for="imagenProducto">Imagen del producto</label>
+                    <input type="file" accept="image/*" (change)="onFileSelected($event)" class="form-control" id="imagenProducto">
+                    <div *ngIf="productoForm.get('imagenProducto')?.invalid && productoForm.get('imagenProducto')?.touched">
+                        <p class="alert alert-danger">Por favor, selecciona una imagen válida</p>
+                    </div>
+                </article>
                 <div class="text-center mt-2">
                     <button mat-raised-button color="primary" type="submit">Guardar</button>
                     <button mat-raised-button color="warn" type="button" (click)="limpiarFormulario()">Limpiar</button>

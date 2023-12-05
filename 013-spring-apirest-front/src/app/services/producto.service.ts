@@ -21,7 +21,7 @@ export class ProductoService {
     return this.httpClient.delete(`${this.baseUrl}/eliminar/${idProducto}`);
   }
 
-  public guardarProducto(producto: Producto){
+  public guardarProducto(producto: FormData){
     return this.httpClient.post(`${this.baseUrl}/guardar`, producto);
   }
 
