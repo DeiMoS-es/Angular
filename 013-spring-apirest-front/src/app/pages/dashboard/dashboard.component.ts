@@ -36,6 +36,7 @@ export class DashboardComponent implements OnInit {
     console.log(idProducto);
     this.productoService.obternerProductoId(idProducto).subscribe({
       next: (data) => {
+        console.log(data);
         this.productoSeleccionado = data;
       },
       error: (err) => {console.log(err);}
