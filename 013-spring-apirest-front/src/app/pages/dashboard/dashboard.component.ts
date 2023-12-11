@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Producto } from 'src/app/interface/producto';
 import { ProductoService } from 'src/app/services/producto.service';
 import { SharedServiceService } from 'src/app/services/shared-service.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-dashboard',
@@ -39,7 +40,7 @@ export class DashboardComponent implements OnInit {
       },
       error: (err) => {console.log(err);}
     })
-    //this.router.navigate(['/ver-producto', idProducto]) //Si quisiera crear otro component para ver un producto
+    //this.router.navigate(['/ver-producto', idProducto]) //Si quisiera crear/navegar a otro component para ver un producto
   }
 
   public editarProducto(idProducto: number) {
@@ -49,8 +50,26 @@ export class DashboardComponent implements OnInit {
 
   public eliminarProducto(idProducto: number) {
     this.productoService.eliminarProducto(idProducto).subscribe({
-      // next:() =>{console.log("Next");},
-      error:(err) =>{console.log("Error: ", err);},
+      next: (data: any) => {
+        console.log("Respuesta del servidor:", data);
+        const mensaje = data.mensaje;
+        console.log(mensaje);
+        Swal.fire({
+          title: mensaje,
+          icon: "success",
+          timer: 2000, // Tiempo en milisegundos (en este caso, 3 segundos)
+          showConfirmButton: false, // Ocultar el botón de confirmación
+      });
+      },
+      error:(err) =>{
+        console.log("Error: ", err);
+        Swal.fire({
+          title: "Error al eliminar el producto",
+          icon: "error",
+          timer: 2000, // Tiempo en milisegundos (en este caso, 3 segundos)
+          showConfirmButton: false, // Ocultar el botón de confirmación
+      })
+      },
       complete:() =>{console.log("Complete"); this.obtenerProductos();}
     });
   }

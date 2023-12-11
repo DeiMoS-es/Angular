@@ -26,9 +26,9 @@ export class GuardarProductoComponent implements OnInit{
       imagenProducto: [null] // Inicializado con null ya que no es requerido inicialmente
     })
   };
+
   public onFileSelected(event: any):void {
     const file: File | null = event.target.files?.[0] || null;
-
     if (file) {
       // Verificar el tamaño máximo del archivo (ejemplo: 10 MB)
       const maxSizeInBytes = 10 * 1024 * 1024; // 10 MB
@@ -65,7 +65,6 @@ export class GuardarProductoComponent implements OnInit{
       // Puedes agregar un mensaje al usuario o realizar otras acciones según tus necesidades
     }
   }
-
 
   public onSubmit(){
     this.formularioEnviado = true;
