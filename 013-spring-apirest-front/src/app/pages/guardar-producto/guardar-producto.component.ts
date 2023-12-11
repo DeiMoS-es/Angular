@@ -85,9 +85,9 @@ export class GuardarProductoComponent implements OnInit{
         console.log(data);
       },
       error: (err) => {
-        console.log("Error: ", err);
+        console.log("Error: ", err.error);
         Swal.fire({
-            title: "Error al crear el producto",
+            title: err.error,
             icon: "error",
             timer: 2000, // Tiempo en milisegundos (en este caso, 3 segundos)
             showConfirmButton: false, // Ocultar el botón de confirmación
