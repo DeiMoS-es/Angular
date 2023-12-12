@@ -58,6 +58,7 @@ export class EditarProductoComponent implements OnInit {
       error: (err) => {console.log(err);}
     });
   }
+
   public onFileSelected(event: any):void {
     const file: File | null = event.target.files?.[0] || null;
     if (file) {
@@ -96,6 +97,7 @@ export class EditarProductoComponent implements OnInit {
       // Puedes agregar un mensaje al usuario o realizar otras acciones según tus necesidades
     }
   }
+
   public onSubmit() {
     this.formularioEnviado = true;
     if (this.productoFormEdit && this.productoFormEdit?.valid) {
@@ -105,7 +107,6 @@ export class EditarProductoComponent implements OnInit {
       formData.append("precioProducto", this.productoFormEdit.get("precioProducto")!.value);
       formData.append("stockProducto", this.productoFormEdit.get("stockProducto")!.value);
       formData.append("tipoProducto", this.productoFormEdit.get("tipoProducto")!.value);
-      //guardar la imagen, pero quiero que esto sea opcional
       // Verificar si se proporciona una nueva imagen
       const nuevaImagenSeleccionada = this.productoFormEdit.get('imagenProducto')!.value !== this.productoEditado.imagen.imagenUrl;
       // Agregar la imagen al FormData solo si se selecciona una nueva
