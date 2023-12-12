@@ -23,7 +23,7 @@ export class GuardarProductoComponent implements OnInit{
       precioProducto: ['', [Validators.required, Validators.pattern(/^\d+(\.\d+)?$/)]],
       stockProducto: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
       tipoProducto: ['', [Validators.required]],
-      imagenProducto: [null] // Inicializado con null ya que no es requerido inicialmente
+      imagenProducto: ['', [Validators.required]] // Inicializado con null ya que no es requerido inicialmente
     })
   };
 

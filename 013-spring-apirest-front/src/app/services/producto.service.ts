@@ -25,7 +25,7 @@ export class ProductoService {
     return this.httpClient.post(`${this.baseUrl}/guardar`, producto);
   }
 
-  public editarProducto(idProducto: number, producto: Producto){
+  public editarProducto(idProducto: number, producto: FormData){
     return this.httpClient.put(`${this.baseUrl}/editar/${idProducto}`, producto);
   }
 
