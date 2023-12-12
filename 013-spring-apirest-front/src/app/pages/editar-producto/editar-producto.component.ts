@@ -98,8 +98,6 @@ export class EditarProductoComponent implements OnInit {
   }
   public onSubmit() {
     this.formularioEnviado = true;
-    console.log(this.idProducto);
-    console.log(this.productoEditado.imagen);
     if (this.productoFormEdit && this.productoFormEdit?.valid) {
       const formData = new FormData();
       formData.append("nombreProducto", this.productoFormEdit.get("nombreProducto")!.value);
@@ -108,21 +106,12 @@ export class EditarProductoComponent implements OnInit {
       formData.append("stockProducto", this.productoFormEdit.get("stockProducto")!.value);
       formData.append("tipoProducto", this.productoFormEdit.get("tipoProducto")!.value);
       //guardar la imagen, pero quiero que esto sea opcional
-      // if(this.productoFormEdit.get("imagenProducto")?.value == null || this.productoFormEdit.get("imagenProducto")?.value == ""){
-      //   formData.append('multipartFile', this.productoEditado.imagen.imagenUrl);
-      // }else{
-      //   formData.append('multipartFile', this.productoFormEdit.get("imagenProducto")!.value)
-      // }
       // Verificar si se proporciona una nueva imagen
-    const nuevaImagenSeleccionada = this.productoFormEdit.get('imagenProducto')!.value !== this.productoEditado.imagen.imagenUrl;
-
-    // Agregar la imagen al FormData solo si se selecciona una nueva
-    if (nuevaImagenSeleccionada) {
-      formData.append('multipartFile', this.productoFormEdit.get("imagenProducto")!.value);
-    }
-      // formData.append('multipartFile', this.productoFormEdit.get("imagenProducto")!.value)
-      // formData.append("multipartFile", this.productoFormEdit.get("imagenProducto")!.value);
-      console.log(formData);
+      const nuevaImagenSeleccionada = this.productoFormEdit.get('imagenProducto')!.value !== this.productoEditado.imagen.imagenUrl;
+      // Agregar la imagen al FormData solo si se selecciona una nueva
+      if (nuevaImagenSeleccionada) {
+        formData.append('multipartFile', this.productoFormEdit.get("imagenProducto")!.value);
+      }
       this.porductoService.editarProducto( this.idProducto ,formData).subscribe({
         next: (data) => {
           console.log(data);
