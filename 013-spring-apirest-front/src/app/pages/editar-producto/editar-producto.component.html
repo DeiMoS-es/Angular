@@ -42,8 +42,8 @@
                     </div>
                 </article>
                 <article>
-                    <div mat-card-avatar class="example-header-image">
-                        <img src="{{ productoEditado?.imagen?.imagenUrl }}" alt="">
+                    <div mat-card-avatar class="example-header-image" *ngIf="imagenValida">
+                        <img src="{{ productoEditado.imagen.imagenUrl }}" alt="">
                     </div>
                 </article>
                 <div class="text-center mt-2">

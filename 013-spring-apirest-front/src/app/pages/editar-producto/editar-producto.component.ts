@@ -17,7 +17,7 @@ export class EditarProductoComponent implements OnInit {
   formularioEnviado = false;
   idProducto: any;
   productoEditado: Producto;
-  // imagenValida = true;
+  imagenValida = false;
 
   constructor(
     private porductoService: ProductoService,
@@ -34,7 +34,7 @@ export class EditarProductoComponent implements OnInit {
       precioProducto: ['', Validators.pattern(/^\d+(\.\d+)?$/)],
       stockProducto: ['', Validators.pattern(/^\d+$/)],
       tipoProducto: ['', Validators.required],
-      imagenProducto: ['' || null]
+      imagenProducto: ['']
     });
     this.activatedRoute.paramMap.subscribe(params => {
       this.idProducto = params.get('idProducto');
@@ -43,7 +43,7 @@ export class EditarProductoComponent implements OnInit {
     // Obtén el producto a editar del servicio (asumiendo que obtenerProductoId devuelve una promesa)
     this.porductoService.obternerProductoId(this.idProducto).subscribe({
       next:(data: Producto) =>{
-        this.productoEditado = data;
+        this.productoEditado = data as Producto;
         // Asigna valores al formulario después de crearlo
         this.productoFormEdit.patchValue({
           nombreProducto: this.productoEditado.nombreProducto || '',
@@ -51,8 +51,11 @@ export class EditarProductoComponent implements OnInit {
           precioProducto: this.productoEditado.precioProducto || '',
           stockProducto: this.productoEditado.stockProducto || '',
           tipoProducto: this.productoEditado.tipoProducto || '',
-          imagenProducto: this.productoEditado.imagen // Inicializado con null ya que no es requerido inicialmente
+          imagenProducto: this.productoEditado.imagen
         });
+        if((this.productoEditado.imagen !== null) || this.productoEditado.imagen !== undefined){ // Comprobación para mostrar la imagen del producto
+          this.imagenValida = true;
+        }
         this.cdr.detectChanges();
       },
       error: (err) => {console.log(err);}
