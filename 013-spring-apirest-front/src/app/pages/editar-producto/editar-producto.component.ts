@@ -117,8 +117,14 @@ export class EditarProductoComponent implements OnInit {
         formData.append('multipartFile', this.productoFormEdit.get("imagenProducto")!.value);
       }
       this.porductoService.editarProducto( this.idProducto ,formData).subscribe({
-        next: (data) => {
-          console.log(data);
+        next: (data: any) => {
+          const mensaje = data.mensaje;
+          Swal.fire({
+            title: mensaje,
+            icon: 'success',
+            timer: 2000, // Tiempo en milisegundos (en este caso, 3 segundos)
+            showConfirmButton: false, // Ocultar el botón de confirmación
+          });
         },
         error: (err) => {
           console.log('Error: ', err);
@@ -130,13 +136,6 @@ export class EditarProductoComponent implements OnInit {
           });
         },
         complete: () => {
-          console.log('Complete');
-          Swal.fire({
-            title: 'Producto Editado',
-            icon: 'success',
-            timer: 2000, // Tiempo en milisegundos (en este caso, 3 segundos)
-            showConfirmButton: false, // Ocultar el botón de confirmación
-          });
           this.route.navigate(['dashboard']);
         },
       });
