@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable,Subject } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { Producto } from '../interface/producto';
 import { SharedServiceService } from './shared-service.service';
 
