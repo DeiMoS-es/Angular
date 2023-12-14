@@ -1,6 +1,8 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { Producto } from 'src/app/interface/producto';
+import { ProductoDTO } from 'src/app/interface/producto-dto';
+import { CarritoService } from 'src/app/services/carrito.service';
 import { ProductoService } from 'src/app/services/producto.service';
 import { SharedServiceService } from 'src/app/services/shared-service.service';
 import Swal from 'sweetalert2';
@@ -15,8 +17,10 @@ export class DashboardComponent implements OnInit {
   productos: Producto[];
   displayedColumns: string[] = ['id', 'nombre', 'descripcion', 'precio', 'stock', 'tipo', 'acciones'];
   productoSeleccionado: Producto | null = null;
+  
 
-  constructor(private productoService: ProductoService, private router: Router, private sharedService: SharedServiceService) {}
+  constructor(private productoService: ProductoService, private router: Router, private sharedService: SharedServiceService,
+              private carritoService: CarritoService) {}
 
   ngOnInit(): void {
     this.obtenerProductos();
@@ -76,6 +80,34 @@ export class DashboardComponent implements OnInit {
 
   public cerrarDetalles(){
     this.productoSeleccionado = null;
+  }
+
+  public addProducto(idProducto: number){
+    this.productoService.obternerProductoId(idProducto).subscribe({
+      next: (data) => {
+        console.log(data);
+        let productoDTO: ProductoDTO = new ProductoDTO(
+          data.idProducto,
+          data.nombreProducto,
+          data.precioProducto,
+          data.stockProducto,
+          0
+        );
+        this.carritoService.agregarProducto(productoDTO);
+      },
+      error: (err) =>{
+        console.log(err);
+        Swal.fire({
+          title: "Error al añadir el producto al carrito",
+          icon: "error",
+          timer: 2000, // Tiempo en milisegundos (en este caso, 3 segundos)
+          showConfirmButton: false, // Ocultar el botón de confirmación
+        })
+      },
+      complete: ()=>{
+        console.log(this.carritoService.obtenerListaProductosEnPedido());
+      }
+    });
   }
 
 }

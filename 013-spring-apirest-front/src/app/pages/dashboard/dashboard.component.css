@@ -32,4 +32,8 @@
     margin-bottom: 36vh;
     z-index: 1; /* Asegurarse de que la tarjeta aparezca sobre la lista */   
   }
+
+  .btn-cart{
+    color: #4CAF50;
+  }
   
