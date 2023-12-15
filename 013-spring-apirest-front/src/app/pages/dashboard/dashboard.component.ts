@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Producto } from 'src/app/interface/producto';
 import { ProductoDTO } from 'src/app/interface/producto-dto';
 import { CarritoService } from 'src/app/services/carrito.service';
+import { ContadorCarritoService } from 'src/app/services/contador-carrito.service';
 import { ProductoService } from 'src/app/services/producto.service';
 import { SharedServiceService } from 'src/app/services/shared-service.service';
 import Swal from 'sweetalert2';
@@ -20,7 +21,7 @@ export class DashboardComponent implements OnInit {
   
 
   constructor(private productoService: ProductoService, private router: Router, private sharedService: SharedServiceService,
-              private carritoService: CarritoService) {}
+              private carritoService: CarritoService, private contadorCarrito: ContadorCarritoService) {}
 
   ngOnInit(): void {
     this.obtenerProductos();
@@ -93,7 +94,7 @@ export class DashboardComponent implements OnInit {
           data.stockProducto,
           0
         );
-        this.carritoService.agregarProducto(productoDTO);
+        this.carritoService.agregarProductoALista(productoDTO);
       },
       error: (err) =>{
         console.log(err);
@@ -105,6 +106,7 @@ export class DashboardComponent implements OnInit {
         })
       },
       complete: ()=>{
+        this.contadorCarrito.aumentarContador();
         console.log(this.carritoService.obtenerListaProductosEnPedido());
       }
     });

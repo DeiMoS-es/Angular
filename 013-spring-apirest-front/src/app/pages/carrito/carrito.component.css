@@ -1,0 +1,9 @@
+.cart-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.paginator-container {
+    margin-top: 20px; /* Ajusta el margen superior según sea necesario */
+}

@@ -18,6 +18,11 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatBadgeModule } from '@angular/material/badge';
+import { CarritoComponent } from './pages/carrito/carrito.component';
+import { MatListModule } from '@angular/material/list';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -28,6 +33,7 @@ import { MatCardModule } from '@angular/material/card';
     GuardarProductoComponent,
     NavBarComponent,
     EditarProductoComponent,
+    CarritoComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,7 +45,11 @@ import { MatCardModule } from '@angular/material/card';
     MatButtonModule,
     FormsModule, 
     ReactiveFormsModule,
-    MatCardModule
+    MatCardModule,
+    MatBadgeModule,
+    MatListModule,
+    MatGridListModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

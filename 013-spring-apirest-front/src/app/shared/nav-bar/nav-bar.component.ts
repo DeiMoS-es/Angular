@@ -1,5 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 import { Producto } from 'src/app/interface/producto';
+import { ContadorCarritoService } from 'src/app/services/contador-carrito.service';
 import { ProductoService } from 'src/app/services/producto.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class NavBarComponent {
   //Variables
   nombreProducto: string = '';
   sugerencias: Producto[] = [];
-  constructor(private productoService: ProductoService){}
+  constructor(private productoService: ProductoService, private contadorCarrito: ContadorCarritoService){}
 
   public busquedaEnTiempoReal(nombreProducto: string){
     if(nombreProducto.length > 1){
@@ -30,6 +31,11 @@ export class NavBarComponent {
 
   public onSubmit(){
     console.log(this.nombreProducto);
+  }
+
+  public obtenerContadorProductos(){
+    const contador = this.contadorCarrito.getContadorProductos();
+    return contador;
   }
 
   /**

@@ -13,7 +13,7 @@ export class CarritoService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public agregarProducto(producto: ProductoDTO): void{
+  public agregarProductoALista(producto: ProductoDTO): void{
     const productoExisteEnLista = this.listaProductos.find((p) => p.idProducto === producto.idProducto);
     if(productoExisteEnLista){
       productoExisteEnLista.cantidad++;
