@@ -17,8 +17,10 @@ export class CarritoService {
     const productoExisteEnLista = this.listaProductos.find((p) => p.idProducto === producto.idProducto);
     if(productoExisteEnLista){
       productoExisteEnLista.cantidad++;
+      producto.stockProducto = producto.stockProducto - producto.cantidad;
     }else{
       producto.cantidad = 1;
+      producto.stockProducto = producto.stockProducto - producto.cantidad;
       this.listaProductos.push(producto);
     }
   }

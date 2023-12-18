@@ -10,7 +10,7 @@
         <!-- Precio de Producto Column -->
         <ng-container matColumnDef="precioProducto">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Precio de Producto </mat-header-cell>
-            <mat-cell *matCellDef="let producto"> {{producto.precioProducto | currency}} </mat-cell>
+            <mat-cell *matCellDef="let producto"> {{producto.precioProducto | number:'1.2-2' }} € </mat-cell>
         </ng-container>
 
         <!-- Cantidad de Producto Column -->
@@ -22,14 +22,19 @@
         <!-- Columna del total de cada producto -->
         <ng-container matColumnDef="total">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Total </mat-header-cell>
-            <mat-cell *matCellDef="let producto"> {{calcularPrecioTotalProducto(producto.cantidad, producto.precioProducto)}} unidades </mat-cell>
+            <mat-cell *matCellDef="let producto"> {{calcularPrecioTotalProducto(producto.cantidad, producto.precioProducto) | number:'1.2-2' }} €</mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
-
-    <div class="paginator-container" *ngIf="listaProductos.length > 0">
+    <div class="precio-total" *ngIf="listaProductos.length > 0">
+        Precio Total del Pedido: {{ calcularTotalPedido(listaProductos) | number:'1.2-2' }} €
+        <div class="confirmar-pedido">
+            <button mat-raised-button color="primary" class="confirmar-pedido" (click)="confirmarPedido()">Confirmar Pedido</button>
+        </div>
+    </div>
+    <div class="paginator-container" *ngIf="listaProductos.length > 5">
         <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
     </div>
 </mat-card>

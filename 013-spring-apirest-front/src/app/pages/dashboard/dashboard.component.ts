@@ -18,7 +18,8 @@ export class DashboardComponent implements OnInit {
   productos: Producto[];
   displayedColumns: string[] = ['id', 'nombre', 'descripcion', 'precio', 'stock', 'tipo', 'acciones'];
   productoSeleccionado: Producto | null = null;
-  
+  btnCarrito = true;  
+  cantidad: number = 1;
 
   constructor(private productoService: ProductoService, private router: Router, private sharedService: SharedServiceService,
               private carritoService: CarritoService, private contadorCarrito: ContadorCarritoService) {}
@@ -95,6 +96,8 @@ export class DashboardComponent implements OnInit {
           0
         );
         this.carritoService.agregarProductoALista(productoDTO);
+        
+        
       },
       error: (err) =>{
         console.log(err);
@@ -106,10 +109,14 @@ export class DashboardComponent implements OnInit {
         })
       },
       complete: ()=>{
+        // if(this.carritoService.obtenerListaProductosEnPedido()){}
         this.contadorCarrito.aumentarContador();
         console.log(this.carritoService.obtenerListaProductosEnPedido());
       }
     });
   }
-
+  //TODO actualizar el stock al ir añadiendo productos a la lista
+  public actualizarStock(){
+    
+  }
 }

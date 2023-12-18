@@ -1,9 +1,25 @@
 .cart-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .paginator-container {
-    margin-top: 20px; /* Ajusta el margen superior según sea necesario */
+  margin-top: 20px; /* Ajusta el margen superior según sea necesario */
+}
+
+.precio-total {
+  margin: 10px 0; /* Margen de 10px en top y bot */
+  border: 2px solid black; /* Borde de 1px (o el grosor que prefieras) y color gris claro */
+  padding: 10px; /* Añade espacio interno para mejorar la apariencia */
+  box-sizing: border-box; /* Evita que el borde afecte el tamaño total del elemento */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.confirmar-pedido {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
 }
