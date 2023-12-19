@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ProductoDTO } from 'src/app/interface/producto-dto';
 import { CarritoService } from 'src/app/services/carrito.service';
 import { PedidoService } from 'src/app/services/pedido.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-carrito',
@@ -13,12 +15,12 @@ export class CarritoComponent implements OnInit{
   listaProductos: ProductoDTO[] = [];
   precioTotalPedido: number = 0;
 
-  constructor(private carritoService: CarritoService, private pedidoService: PedidoService){};
+  constructor(private carritoService: CarritoService, private pedidoService: PedidoService,
+              private route: Router){};
   displayedColumns: string[] = ['nombreProducto', 'precioProducto', 'cantidad', 'total'];
 
   ngOnInit(): void {    
     this.listaProductos = this.carritoService.obtenerListaProductosEnPedido();
-    console.log(this.listaProductos);
   }
 
   public calcularPrecioTotalProducto(cantidad:number, precio:number){
@@ -32,9 +34,15 @@ export class CarritoComponent implements OnInit{
 
   public confirmarPedido(){
     return this.pedidoService.realizarPedido(this.listaProductos).subscribe({
-      next:(data) => {console.log(data);},
-      error: (err) => {console.log(err);},
-      complete: () => {console.log("complete");}
+      next:(data) => {
+        Swal.fire({
+          title: "Pedido realizado",
+          icon: "success",
+          timer: 2000,
+          showConfirmButton: false, // Ocultar el botón de confirmación
+        });
+        this.route.navigate(['dashboard']);},
+      error: (err) => {console.log("Error al realizar el pedido: ",err);}
     })
   }
 }

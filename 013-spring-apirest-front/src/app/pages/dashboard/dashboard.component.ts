@@ -87,7 +87,6 @@ export class DashboardComponent implements OnInit {
   public addProducto(idProducto: number){
     this.productoService.obternerProductoId(idProducto).subscribe({
       next: (data) => {
-        console.log(data);
         let productoDTO: ProductoDTO = new ProductoDTO(
           data.idProducto,
           data.nombreProducto,
@@ -111,7 +110,6 @@ export class DashboardComponent implements OnInit {
       complete: ()=>{
         // if(this.carritoService.obtenerListaProductosEnPedido()){}
         this.contadorCarrito.aumentarContador();
-        console.log(this.carritoService.obtenerListaProductosEnPedido());
       }
     });
   }
