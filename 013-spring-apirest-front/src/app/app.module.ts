@@ -12,6 +12,7 @@ import { NavBarComponent } from './shared/nav-bar/nav-bar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditarProductoComponent } from './pages/editar-producto/editar-producto.component';
+import { LoginComponent } from './pages/user/login/login.component';
 
 // Angular Material
 import { MatTableModule } from '@angular/material/table';
@@ -23,7 +24,8 @@ import { CarritoComponent } from './pages/carrito/carrito.component';
 import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatPaginatorModule } from '@angular/material/paginator';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +36,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     NavBarComponent,
     EditarProductoComponent,
     CarritoComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +52,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatBadgeModule,
     MatListModule,
     MatGridListModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
