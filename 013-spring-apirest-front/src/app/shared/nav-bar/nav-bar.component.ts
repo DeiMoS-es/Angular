@@ -1,18 +1,33 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Producto } from 'src/app/interface/producto';
 import { ContadorCarritoService } from 'src/app/services/contador-carrito.service';
+import { LoginService } from 'src/app/services/login.service';
 import { ProductoService } from 'src/app/services/producto.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css']
 })
-export class NavBarComponent {
+export class NavBarComponent implements OnInit{
   //Variables
   nombreProducto: string = '';
   sugerencias: Producto[] = [];
-  constructor(private productoService: ProductoService, private contadorCarrito: ContadorCarritoService){}
+  isLoggedIn: boolean = false;//el usuario cuando inicia por primera vez no esta logueado
+  token: string | null = null;
+
+  constructor(private productoService: ProductoService, private contadorCarrito: ContadorCarritoService,
+              private userService: UsuarioService, private loginService: LoginService){}
+
+  ngOnInit(): void {
+    this.loginService.usuarioIsLoginSubject.subscribe({
+      next: (userLoginOn) => {
+        this.isLoggedIn = userLoginOn;
+      }
+    });
+    this.comprobarToken();
+  }
 
   public busquedaEnTiempoReal(nombreProducto: string){
     if(nombreProducto.length > 1){
@@ -49,6 +64,15 @@ export class NavBarComponent {
     if (!targetElement.closest('.mr-100')) {
       // Cerrar la lista
       this.sugerencias = [];
+    }
+  };
+
+  private comprobarToken():void{
+    this.token = this.loginService.getToken();
+    if(this.token){
+      this.isLoggedIn = true;
+    }else{
+      this.isLoggedIn = false;
     }
   }
 }

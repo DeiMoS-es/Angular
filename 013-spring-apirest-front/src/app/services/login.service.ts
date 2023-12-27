@@ -23,7 +23,7 @@ export class LoginService {
      Para este caso, usar un BehaviorSubject es más apropiado porque deseas que los componentes que se suscriban al servicio obtengan el estado de inicio de sesión actual tan pronto 
      como se suscriban, independientemente de cuándo se llamó a setUsuarioIsLogin. Esto garantiza que los componentes siempre reciban la información más reciente.
    */
-    private usuarioIsLoginSubject = new BehaviorSubject<boolean>(false);
+    public usuarioIsLoginSubject = new BehaviorSubject<boolean>(false);
   constructor(private httClient: HttpClient) { }
 
   public login(credentials: LoginRequest):Observable<any>{
