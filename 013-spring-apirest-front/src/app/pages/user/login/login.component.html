@@ -1,10 +1,9 @@
-<div class="container">
-    <div class="row">
+<section class="container">
         <div class="col-md-6 offset-md-3">            
-            <form [formGroup]="loginForm" class="login-form">
+            <form [formGroup]="loginForm" class="login-form" (ngSubmit)="onSubmit()">
                 <h2>Iniciar Sesión</h2>
                 <!-- Mensaje de error -->
-                <div class="alert alert-danger" *ngIf="formularioEnviado && loginForm.invalid">
+                <div class="text-danger" *ngIf="formularioEnviado && loginForm.invalid">
                     Por favor, revisa los campos del formulario.
                 </div>
                 <div class="form-group">
@@ -13,12 +12,11 @@
                             <mat-icon>person</mat-icon>
                             <div class="input-label-container">
                                 <mat-label>Nombre de Usuario</mat-label>
-                                <input matInput placeholder="Introduce tu nombre de usuario" type="text" formControlName="userName">
+                                <input matInput placeholder="ejemplo@correo.com" type="mail" formControlName="username">
                             </div>
                         </div>
                     </mat-form-field>
-                    <div *ngIf="loginForm.get('userName')?.invalid && loginForm.get('userName')?.touched"
-                        class="alert alert-danger">
+                    <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched" class="text-danger">
                         Nombre de usuario es requerido
                     </div>
                 </div>
@@ -32,13 +30,11 @@
                             </div>
                         </div>
                     </mat-form-field>
-                    <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
-                    class="alert alert-danger">
+                    <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger">
                         Contraseña es requerida
                     </div>
                 </div>
                 <button mat-raised-button color="primary" type="submit">Iniciar Sesión</button>
             </form>
         </div>
-    </div>
-</div>
+</section>
