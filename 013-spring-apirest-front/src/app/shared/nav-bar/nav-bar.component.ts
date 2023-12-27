@@ -1,10 +1,11 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Producto } from 'src/app/interface/producto';
 import { ContadorCarritoService } from 'src/app/services/contador-carrito.service';
 import { LoginService } from 'src/app/services/login.service';
 import { ProductoService } from 'src/app/services/producto.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -18,7 +19,8 @@ export class NavBarComponent implements OnInit{
   token: string | null = null;
 
   constructor(private productoService: ProductoService, private contadorCarrito: ContadorCarritoService,
-              private userService: UsuarioService, private loginService: LoginService){}
+              private userService: UsuarioService, private loginService: LoginService,
+              private route: Router){}
 
   ngOnInit(): void {
     this.loginService.usuarioIsLoginSubject.subscribe({
@@ -74,5 +76,17 @@ export class NavBarComponent implements OnInit{
     }else{
       this.isLoggedIn = false;
     }
+  }
+
+  public cerrarSesion():void{
+    Swal.fire({
+      text: 'Sesión cerrada.',
+      icon: 'error',
+      timer: 1000,
+      showConfirmButton: false
+    });
+    this.loginService.deleteToken();
+    this.route.navigate(['dashboard']);
+    // this.userService.deleteUserData();
   }
 }

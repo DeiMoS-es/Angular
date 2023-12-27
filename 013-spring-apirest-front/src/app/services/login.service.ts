@@ -7,6 +7,7 @@ import { LoginRequest } from '../interface/login-request';
   providedIn: 'root'
 })
 export class LoginService {
+  
   private token: string | null;
   private baseURLLogin = "http://localhost:8080/auth";
 /**
@@ -46,5 +47,10 @@ export class LoginService {
 
   public logout(): void{
     localStorage.removeItem('token');
+  }
+
+  public deleteToken():void {
+    localStorage.removeItem('token');
+    this.usuarioIsLoginSubject.next(false);
   }
 }

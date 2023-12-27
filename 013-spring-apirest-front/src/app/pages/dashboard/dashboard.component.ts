@@ -95,8 +95,6 @@ export class DashboardComponent implements OnInit {
           0
         );
         this.carritoService.agregarProductoALista(productoDTO);
-        
-        
       },
       error: (err) =>{
         console.log(err);
