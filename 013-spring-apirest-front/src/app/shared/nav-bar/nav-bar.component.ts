@@ -85,7 +85,8 @@ export class NavBarComponent implements OnInit{
       timer: 1000,
       showConfirmButton: false
     });
-    this.loginService.deleteToken();
+    this.loginService.logout();
+    this.isLoggedIn = false;
     this.route.navigate(['dashboard']);
     // this.userService.deleteUserData();
   }

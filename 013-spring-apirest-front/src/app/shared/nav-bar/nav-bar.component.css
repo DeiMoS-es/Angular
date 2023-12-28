@@ -17,3 +17,6 @@ div.mr-100 ul.list-group li:hover{
     /* Estilos específicos para el mat-icon dentro de un elemento con la clase nav-item */
     margin-right: 10px;
   }
+.nav-item .nav-link{
+    max-height: 36px;
+}

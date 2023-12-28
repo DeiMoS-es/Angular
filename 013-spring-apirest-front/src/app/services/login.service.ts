@@ -38,7 +38,7 @@ export class LoginService {
   }
 
   public getLoginStatus():Observable<boolean>{
-    return this.usuarioIsLoginSubject.asObservable();
+    return this.usuarioIsLoginSubject;
   }
 
   public getToken(): string | null{
@@ -47,6 +47,7 @@ export class LoginService {
 
   public logout(): void{
     localStorage.removeItem('token');
+    this.usuarioIsLoginSubject.next(false);
   }
 
   public deleteToken():void {

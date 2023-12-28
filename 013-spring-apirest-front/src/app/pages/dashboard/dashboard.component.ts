@@ -1,9 +1,10 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Producto } from 'src/app/interface/producto';
 import { ProductoDTO } from 'src/app/interface/producto-dto';
 import { CarritoService } from 'src/app/services/carrito.service';
 import { ContadorCarritoService } from 'src/app/services/contador-carrito.service';
+import { LoginService } from 'src/app/services/login.service';
 import { ProductoService } from 'src/app/services/producto.service';
 import { SharedServiceService } from 'src/app/services/shared-service.service';
 import Swal from 'sweetalert2';
@@ -16,19 +17,23 @@ import Swal from 'sweetalert2';
 export class DashboardComponent implements OnInit {
   // variables
   productos: Producto[];
-  displayedColumns: string[] = ['id', 'nombre', 'descripcion', 'precio', 'stock', 'tipo', 'acciones'];
+  displayedColumns: string[] = ['id', 'nombre', 'descripcion', 'precio', 'stock', 'tipo'];
   productoSeleccionado: Producto | null = null;
   btnCarrito = true;  
   cantidad: number = 1;
+  isLoggedIn: boolean = false;
+  token: string | null = null;
 
   constructor(private productoService: ProductoService, private router: Router, private sharedService: SharedServiceService,
-              private carritoService: CarritoService, private contadorCarrito: ContadorCarritoService) {}
+              private carritoService: CarritoService, private contadorCarrito: ContadorCarritoService,
+              private loginService: LoginService) {}
 
   ngOnInit(): void {
     this.obtenerProductos();
     this.sharedService.productoSeleccionado$.subscribe(
         (product) => this.productoSeleccionado = product
-      )
+    )
+    this.comprobarToken();
   }
 
   private obtenerProductos(){
@@ -111,6 +116,23 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
+
+  public mostrarAcciones(isLoggedIn: boolean){
+    if(isLoggedIn){
+      this.displayedColumns = ['id', 'nombre', 'descripcion', 'precio', 'stock', 'tipo','acciones'];
+    } else {
+      this.displayedColumns = ['id', 'nombre', 'descripcion', 'precio', 'stock', 'tipo'];
+    }
+  }
+
+  private comprobarToken(){
+    //Nos subscribimos a la variable declarada en LoginService, usuarioIsLoginSubject
+    this.loginService.usuarioIsLoginSubject.subscribe((isLoggedIn) => {
+      this.isLoggedIn = isLoggedIn;
+      this.mostrarAcciones(isLoggedIn);
+    });
+  }
+
   //TODO actualizar el stock al ir añadiendo productos a la lista
   public actualizarStock(){
     
