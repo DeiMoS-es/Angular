@@ -33,6 +33,11 @@ export class DashboardComponent implements OnInit {
     this.sharedService.productoSeleccionado$.subscribe(
         (product) => this.productoSeleccionado = product
     )
+    this.loginService.usuarioIsLoginSubject.subscribe({
+      next: (userLoginOn) =>{
+        this.isLoggedIn = userLoginOn;
+      }
+    })
     this.comprobarToken();
   }
 
@@ -125,12 +130,14 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  private comprobarToken(){
-    //Nos subscribimos a la variable declarada en LoginService, usuarioIsLoginSubject
-    this.loginService.usuarioIsLoginSubject.subscribe((isLoggedIn) => {
-      this.isLoggedIn = isLoggedIn;
-      this.mostrarAcciones(isLoggedIn);
-    });
+  private comprobarToken():void{
+    this.token = this.loginService.getToken();
+    if(this.token){
+      this.isLoggedIn = true;
+      this.mostrarAcciones(this.isLoggedIn)
+    }else{
+      this.isLoggedIn = false;
+    }
   }
 
   //TODO actualizar el stock al ir añadiendo productos a la lista
