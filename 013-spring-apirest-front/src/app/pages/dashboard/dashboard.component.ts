@@ -39,9 +39,10 @@ export class DashboardComponent implements OnInit {
     )
     this.comprobarToken();
     this.usuario$ = this.buscarUsuarioId();  
-    this.usuario$.subscribe(usuario => {
-      console.log(usuario);
-  });
+    // Ver el contenido de usuario$
+  //   this.usuario$.subscribe(usuario => {
+  //     console.log(usuario);
+  // });
   }
 
   private obtenerProductos(){

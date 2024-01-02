@@ -11,6 +11,9 @@
           <li *ngIf="!isLoggedIn" class="nav-item">
             <a class="nav-link" routerLink="/login">Iniciar Sesión</a>
           </li>
+          <li *ngIf="!isLoggedIn" class="nav-item">
+            <a class="nav-link" routuerLink="/registrarse">Registrarse</a>
+          </li>
           <li *ngIf="isLoggedIn" class="nav-item d-flex align-items-center">
             <a class="nav-link" routerLink="/crear">Crear Producto</a>
           </li>
