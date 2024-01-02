@@ -28,4 +28,8 @@ export class CarritoService {
   public obtenerListaProductosEnPedido(): ProductoDTO[]{
     return this.listaProductos;
   }
+
+  public vaciarListaProductos():void{
+    this.listaProductos = [];
+  }
 }

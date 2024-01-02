@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
 import { Producto } from 'src/app/interface/producto';
 import { ProductoDTO } from 'src/app/interface/producto-dto';
+import { User } from 'src/app/interface/user';
 import { CarritoService } from 'src/app/services/carrito.service';
 import { ContadorCarritoService } from 'src/app/services/contador-carrito.service';
 import { LoginService } from 'src/app/services/login.service';
 import { ProductoService } from 'src/app/services/producto.service';
 import { SharedServiceService } from 'src/app/services/shared-service.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -23,22 +26,22 @@ export class DashboardComponent implements OnInit {
   cantidad: number = 1;
   isLoggedIn: boolean = false;
   token: string | null = null;
+  usuario$: Observable<User | null>;
 
   constructor(private productoService: ProductoService, private router: Router, private sharedService: SharedServiceService,
               private carritoService: CarritoService, private contadorCarrito: ContadorCarritoService,
-              private loginService: LoginService) {}
+              private loginService: LoginService, private userService: UsuarioService) {}
 
   ngOnInit(): void {
     this.obtenerProductos();
     this.sharedService.productoSeleccionado$.subscribe(
         (product) => this.productoSeleccionado = product
     )
-    this.loginService.usuarioIsLoginSubject.subscribe({
-      next: (userLoginOn) =>{
-        this.isLoggedIn = userLoginOn;
-      }
-    })
     this.comprobarToken();
+    this.usuario$ = this.buscarUsuarioId();  
+    this.usuario$.subscribe(usuario => {
+      console.log(usuario);
+  });
   }
 
   private obtenerProductos(){
@@ -130,15 +133,27 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  private comprobarToken():void{
-    this.token = this.loginService.getToken();
-    if(this.token){
-      this.isLoggedIn = true;
-      this.mostrarAcciones(this.isLoggedIn)
-    }else{
-      this.isLoggedIn = false;
-    }
+  private comprobarToken(){
+    //Nos subscribimos a la variable declarada en LoginService, usuarioIsLoginSubject
+    this.loginService.usuarioIsLoginSubject.subscribe((isLoggedIn) => {
+      this.isLoggedIn = isLoggedIn;
+      this.mostrarAcciones(isLoggedIn);
+    });
   }
+
+  private buscarUsuarioId(): Observable<User | null>{
+    const idUsuario = this.userService.recuperarIdUsuario();
+    if (idUsuario === null) {
+        console.log('idUsuario es null');
+        return of(null);
+    }
+    const idUsuarioNumber = parseInt(idUsuario);
+    if (isNaN(idUsuarioNumber)) {
+        console.log('idUsuario no es un número');
+        return of(null);
+    }
+    return this.userService.buscarUsuarioById(idUsuarioNumber);
+}
 
   //TODO actualizar el stock al ir añadiendo productos a la lista
   public actualizarStock(){

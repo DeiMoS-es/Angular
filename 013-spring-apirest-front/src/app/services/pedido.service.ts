@@ -11,8 +11,8 @@ export class PedidoService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public realizarPedido(listaProdtuctosDTO: ProductoDTO[]){
-    return this.httpClient.post(`${this.baseURLPedidos}/guardarPedido`, listaProdtuctosDTO);
+  public realizarPedido( idUsuario: number ,listaProdtuctosDTO: ProductoDTO[]){
+    return this.httpClient.post(`${this.baseURLPedidos}/guardarPedido/${idUsuario}`, listaProdtuctosDTO);
   }
 
   //TODO implementar cuando se tenga el sismeta de usuarios.

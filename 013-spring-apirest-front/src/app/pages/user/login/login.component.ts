@@ -72,7 +72,7 @@ export class LoginComponent {
         next: (response) => {
           this.userData = response as User;
           this.userData.token = this.loginService.getToken() || '';
-          console.log(this.userData);
+          localStorage.setItem('userDataId', JSON.stringify(this.userData.idUsuario));
         },
         error: (err) => {console.log(err);},
         complete: () => {

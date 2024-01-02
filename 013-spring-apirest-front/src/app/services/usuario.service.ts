@@ -17,4 +17,12 @@ export class UsuarioService {
   public buscarUsuarioPorNombre(userName: string): Observable<any>{  
     return this.httpClient.get(`${this.baseUserURL}/buscarPorNombre/${userName}`);
   }
+
+  public buscarUsuarioById(idUsuario: number): Observable<any>{
+    return this.httpClient.get(`${this.baseUserURL}/buscarById/${idUsuario}`);
+  }
+
+  public recuperarIdUsuario(){
+    return localStorage.getItem('userDataId');
+  }
 }

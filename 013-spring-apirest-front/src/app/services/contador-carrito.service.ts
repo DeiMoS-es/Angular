@@ -20,4 +20,8 @@ export class ContadorCarritoService {
   disminuirContador() {
     this.contadorProductos--;
   }
+
+  reiniciarContador(){
+    return this.contadorProductos = 0;
+  }
 }

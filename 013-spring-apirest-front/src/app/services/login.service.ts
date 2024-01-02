@@ -28,10 +28,8 @@ export class LoginService {
   constructor(private httClient: HttpClient) { }
 
   public login(credentials: LoginRequest):Observable<any>{
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.httClient.post(`${this.baseURLLogin}/login`, credentials, { headers }).pipe(
+    return this.httClient.post(`${this.baseURLLogin}/login`, credentials).pipe(
       tap( (userData) => {
-        console.log(userData);
         this.usuarioIsLoginSubject.next(true);
       })
     );
@@ -47,6 +45,7 @@ export class LoginService {
 
   public logout(): void{
     localStorage.removeItem('token');
+    localStorage.removeItem('userDataId');
     this.usuarioIsLoginSubject.next(false);
   }
 

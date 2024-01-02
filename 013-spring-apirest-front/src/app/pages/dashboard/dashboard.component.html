@@ -1,5 +1,5 @@
 <app-nav-bar></app-nav-bar>
-<h2 *ngIf="isLoggedIn" class="text-center">Bienvenido: usuario</h2>
+<h2 *ngIf="isLoggedIn" class="text-center">Bienvenido: {{(usuario$ | async)?.username}}</h2>
 <div class="container">
   <table mat-table [dataSource]="productos" class="mat-elevation-z8">
       <!-- Id Column -->
