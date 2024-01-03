@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { LoginRequest } from '../interface/login-request';
+import { User } from '../interface/user';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,10 @@ export class LoginService {
     );
   }
 
+  public registrarUsuario(usuario: User):Observable<any>{
+    return this.httClient.post(`${this.baseURLLogin}/register`, usuario);
+  }
+  
   public getLoginStatus():Observable<boolean>{
     return this.usuarioIsLoginSubject;
   }
