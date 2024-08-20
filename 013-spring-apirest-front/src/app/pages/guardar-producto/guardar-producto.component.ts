@@ -75,7 +75,6 @@ export class GuardarProductoComponent implements OnInit{
     formData.append("precioProducto", this.productoForm.get("precioProducto")!.value);
     formData.append("stockProducto", this.productoForm.get("stockProducto")!.value);
     formData.append("tipoProducto", this.productoForm.get("tipoProducto")!.value);
-
     //Agregar la imagen
     formData.append('multipartFile', this.productoForm.get("imagenProducto")!.value);
     console.log(formData);
