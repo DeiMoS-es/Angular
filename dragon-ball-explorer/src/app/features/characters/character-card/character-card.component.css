@@ -11,6 +11,7 @@ mat-card{
 mat-card img{
     width: 40%;
     height: 70%;
+    object-fit: contain;
 }
 .datos{
     display: flex;

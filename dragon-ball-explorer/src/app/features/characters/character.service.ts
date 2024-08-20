@@ -10,7 +10,11 @@ export class CharacterService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getAllCharacters() {
+  public getCharacters() {
     return this.httpClient.get<Character[]>(`${this.baseUrl}characters`);
+  };
+
+  public getNextsCharacters(pagIndex: number, heroLimit: number){
+    return this.httpClient.get<Character[]>(`${this.baseUrl}characters?page=${pagIndex}&limit=${heroLimit}`);
   };
 }

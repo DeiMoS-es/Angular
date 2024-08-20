@@ -5,6 +5,7 @@ import { CharacterService } from './character.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CharacterCardComponent } from './character-card/character-card.component';
 import {MatCardModule} from '@angular/material/card';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 
@@ -16,7 +17,8 @@ import {MatCardModule} from '@angular/material/card';
   imports: [
     CommonModule,
     HttpClientModule,
-    MatCardModule
+    MatCardModule,
+    MatPaginatorModule
   ],
   exports: [
     CharacterListComponent,
