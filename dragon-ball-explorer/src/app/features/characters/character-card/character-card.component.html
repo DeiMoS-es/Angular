@@ -1,0 +1,15 @@
+<mat-card>
+    <img src="{{ character.image }}" alt="Photo of a character">
+    <mat-card-header class="datos">
+        <!-- <div mat-card-avatar class="avatar"></div> TODO implementar el avatar del "equipo" por ejemplo -->
+        <mat-card-title>{{ character.name }}</mat-card-title>
+        <mat-card-subtitle>{{ character.affiliation }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="datos">
+        <p><strong>KI base: </strong> {{ character.ki }}</p>
+        <p><strong>KI total: </strong>{{ character.maxKi }}</p>
+        <!-- <p *ngIf="character.transformations && character.transformations.length > 0">
+        <strong>Transformaciones:</strong> {{ character.transformations.join(', ') }}
+      </p> -->
+    </mat-card-content>
+</mat-card>

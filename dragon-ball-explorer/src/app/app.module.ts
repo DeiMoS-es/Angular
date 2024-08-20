@@ -5,22 +5,26 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from "./core/core.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PersonajeComponent } from './features/personaje/personaje.component';
 import { CharactersModule } from './features/characters/characters.module';
+
+//Material
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    PersonajeComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CoreModule,
     BrowserAnimationsModule,
-    CharactersModule
+    CharactersModule,
+    MatCardModule
 ],
-  providers: [],
+  providers: [
+  
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
