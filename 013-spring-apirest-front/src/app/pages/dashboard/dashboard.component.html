@@ -1,4 +1,5 @@
 <app-nav-bar></app-nav-bar>
+<h2 *ngIf="isLoggedIn" class="text-center">Bienvenido: {{(usuario$ | async)?.username}}</h2>
 <div class="container">
   <table mat-table [dataSource]="productos" class="mat-elevation-z8">
       <!-- Id Column -->
@@ -23,7 +24,7 @@
       </ng-container>
       <!-- Stock Column -->
       <ng-container matColumnDef="stock">
-          <th mat-header-cell *matHeaderCellDef> Stock </th>
+          <th mat-header-cell *matHeaderCellDef (click)="actualizarStock()"> Stock </th>
           <td mat-cell *matCellDef="let element"> {{element.stockProducto}} </td>
       </ng-container>
       <!-- Tipo Column -->
@@ -35,6 +36,9 @@
       <ng-container matColumnDef="acciones">
           <th mat-header-cell *matHeaderCellDef class="text-center"> Acciones </th>
           <td mat-cell *matCellDef="let element" class="text-center">
+            <button mat-icon-button (click)="addProducto(element.idProducto)" *ngIf="btnCarrito">
+              <mat-icon class="btn-cart">add_shopping_cart</mat-icon>
+            </button>
             <button mat-icon-button (click)="verProducto(element.idProducto)">
               <mat-icon class="mat-primary">visibility</mat-icon>
             </button>
@@ -45,7 +49,7 @@
               <mat-icon class="mat-warn">delete</mat-icon>
             </button>
           </td>
-        </ng-container>
+      </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="mat-row"></tr>
   </table>
@@ -53,22 +57,16 @@
 <div class="center-container">
   <mat-card class="example-card" *ngIf="productoSeleccionado">
     <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
+      <!-- <div mat-card-avatar class="example-header-image"></div> -->
       <mat-card-title>{{productoSeleccionado.nombreProducto}}</mat-card-title>
       <mat-card-subtitle>{{productoSeleccionado.tipoProducto}}</mat-card-subtitle>
     </mat-card-header>
     <!-- TODO agregar imagen producto cuando la tenga -->
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+    <img mat-card-image src="{{productoSeleccionado.imagen.imagenUrl}}" alt="{{productoSeleccionado.imagen.nombreImagen}}">
     <mat-card-content>
-      <p>
-        Descripcion: {{productoSeleccionado.descripcionProducto}}
-      </p>
-      <p>
-        Stock: {{productoSeleccionado.stockProducto}}
-      </p>
-      <p>
-        Precio: {{productoSeleccionado.precioProducto}}
-      </p>
+      <p> Descripcion: {{productoSeleccionado.descripcionProducto}}</p>
+      <p> Stock: {{productoSeleccionado.stockProducto}}</p>
+      <p> Precio: {{productoSeleccionado.precioProducto}}</p>
     </mat-card-content>
     <mat-card-actions class="text-center mx-auto">
       <!-- <button class="text-center mat-primary" mat-icon-button (click)="cerrarDetalles()">Volver</button> -->

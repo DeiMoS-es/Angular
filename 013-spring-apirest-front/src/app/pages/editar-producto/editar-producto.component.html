@@ -33,6 +33,19 @@
                     <label for="tipoProducto">Tipo del producto</label>
                     <input type="text" class="form-control" id="tipoProducto" formControlName="tipoProducto">
                 </article>
+                
+                <article class="form-group">
+                    <label for="imagenProducto">Imagen del producto</label>
+                    <input type="file" accept="image/*" (change)="onFileSelected($event)" class="form-control" id="imagenProducto">
+                    <div *ngIf="productoFormEdit.get('imagenProducto')?.invalid && productoFormEdit.get('imagenProducto')?.touched">
+                        <p class="alert alert-danger">Por favor, selecciona una imagen válida</p>
+                    </div>
+                </article>
+                <article>
+                    <div mat-card-avatar class="example-header-image" *ngIf="imagenValida">
+                        <img src="{{ productoEditado.imagen.imagenUrl }}" alt="">
+                    </div>
+                </article>
                 <div class="text-center mt-2">
                     <button mat-raised-button color="primary" type="submit">Guardar</button>
                     <button mat-raised-button color="warn" type="button" (click)="limpiarFormulario()">Limpiar</button>

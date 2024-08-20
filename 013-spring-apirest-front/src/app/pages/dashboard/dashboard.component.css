@@ -15,7 +15,7 @@
 
   /* TODO cambiar el backgorund-image por la foto del producto cuando la tenga */
   .example-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    /* background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg'); */
     background-size: cover;
   }
   .center-container {
@@ -31,5 +31,9 @@
     position: absolute;
     margin-bottom: 36vh;
     z-index: 1; /* Asegurarse de que la tarjeta aparezca sobre la lista */   
+  }
+
+  .btn-cart{
+    color: #4CAF50;
   }
   

@@ -17,6 +17,7 @@ export class EditarProductoComponent implements OnInit {
   formularioEnviado = false;
   idProducto: any;
   productoEditado: Producto;
+  imagenValida = false;
 
   constructor(
     private porductoService: ProductoService,
@@ -25,6 +26,7 @@ export class EditarProductoComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private cdr: ChangeDetectorRef
   ) {}
+
   ngOnInit(): void {
     this.productoFormEdit = this.formBuilder.group({
       nombreProducto: ['', Validators.required],
@@ -32,6 +34,7 @@ export class EditarProductoComponent implements OnInit {
       precioProducto: ['', Validators.pattern(/^\d+(\.\d+)?$/)],
       stockProducto: ['', Validators.pattern(/^\d+$/)],
       tipoProducto: ['', Validators.required],
+      imagenProducto: ['']
     });
     this.activatedRoute.paramMap.subscribe(params => {
       this.idProducto = params.get('idProducto');
@@ -40,7 +43,7 @@ export class EditarProductoComponent implements OnInit {
     // Obtén el producto a editar del servicio (asumiendo que obtenerProductoId devuelve una promesa)
     this.porductoService.obternerProductoId(this.idProducto).subscribe({
       next:(data: Producto) =>{
-        this.productoEditado = data;
+        this.productoEditado = data as Producto;
         // Asigna valores al formulario después de crearlo
         this.productoFormEdit.patchValue({
           nombreProducto: this.productoEditado.nombreProducto || '',
@@ -48,20 +51,80 @@ export class EditarProductoComponent implements OnInit {
           precioProducto: this.productoEditado.precioProducto || '',
           stockProducto: this.productoEditado.stockProducto || '',
           tipoProducto: this.productoEditado.tipoProducto || '',
+          imagenProducto: this.productoEditado.imagen
         });
+        if((this.productoEditado.imagen !== null) || this.productoEditado.imagen !== undefined){ // Comprobación para mostrar la imagen del producto
+          this.imagenValida = true;
+        }
         this.cdr.detectChanges();
       },
       error: (err) => {console.log(err);}
     });
   }
 
+  public onFileSelected(event: any):void {
+    const file: File | null = event.target.files?.[0] || null;
+    if (file) {
+      // Verificar el tamaño máximo del archivo (ejemplo: 10 MB)
+      const maxSizeInBytes = 10 * 1024 * 1024; // 10 MB
+      if (file.size > maxSizeInBytes) {
+        Swal.fire({
+          title: "Error: El archivo es demasiado grande. Tamaño máximo permitido: 10 MB.",
+          icon: "error",
+          timer: 2000, // Tiempo en milisegundos (en este caso, 3 segundos)
+          showConfirmButton: false, // Ocultar el botón de confirmación
+        })
+        console.error('Error: El archivo es demasiado grande. Tamaño máximo permitido: 10 MB.');        
+        return;
+      }
+      // Verificar el tipo de archivo (ejemplo: solo imágenes permitidas)
+      const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+      if (!allowedTypes.includes(file.type)) {
+        Swal.fire({
+          title: "Error: El archivo no es una imagen válido. Solo se permiten archivos JPEG, PNG o GIF.",
+          icon: "error",
+          timer: 2000, // Tiempo en milisegundos (en este caso, 3 segundos)
+          showConfirmButton: false, // Ocultar el botón de confirmación
+        })
+        console.error('Error: El archivo no es una imagen válido. Solo se permiten archivos JPEG, PNG o GIF.');        
+        return;
+      }
+      // Asignar el archivo seleccionado al campo imagenProducto del formulario
+      this.productoFormEdit.patchValue({
+        imagenProducto: file
+      });
+      // Si es necesario, puedes mostrar la vista previa de la imagen aquí
+      // this.mostrarVistaPrevia(file);
+    } else {
+      console.error('Error: No se seleccionó ningún archivo.');
+      // Puedes agregar un mensaje al usuario o realizar otras acciones según tus necesidades
+    }
+  }
+
   public onSubmit() {
     this.formularioEnviado = true;
-    console.log(this.idProducto);
     if (this.productoFormEdit && this.productoFormEdit?.valid) {
-      this.porductoService.editarProducto( this.idProducto ,this.productoFormEdit.value).subscribe({
-        next: (data) => {
-          console.log(data);
+      const formData = new FormData();
+      formData.append("nombreProducto", this.productoFormEdit.get("nombreProducto")!.value);
+      formData.append("descripcionProducto", this.productoFormEdit.get("descripcionProducto")!.value);
+      formData.append("precioProducto", this.productoFormEdit.get("precioProducto")!.value);
+      formData.append("stockProducto", this.productoFormEdit.get("stockProducto")!.value);
+      formData.append("tipoProducto", this.productoFormEdit.get("tipoProducto")!.value);
+      // Verificar si se proporciona una nueva imagen
+      const nuevaImagenSeleccionada = this.productoFormEdit.get('imagenProducto')!.value !== this.productoEditado.imagen.imagenUrl;
+      // Agregar la imagen al FormData solo si se selecciona una nueva
+      if (nuevaImagenSeleccionada) {
+        formData.append('multipartFile', this.productoFormEdit.get("imagenProducto")!.value);
+      }
+      this.porductoService.editarProducto( this.idProducto ,formData).subscribe({
+        next: (data: any) => {
+          const mensaje = data.mensaje;
+          Swal.fire({
+            title: mensaje,
+            icon: 'success',
+            timer: 2000, // Tiempo en milisegundos (en este caso, 3 segundos)
+            showConfirmButton: false, // Ocultar el botón de confirmación
+          });
         },
         error: (err) => {
           console.log('Error: ', err);
@@ -73,13 +136,6 @@ export class EditarProductoComponent implements OnInit {
           });
         },
         complete: () => {
-          console.log('Complete');
-          Swal.fire({
-            title: 'Producto Editado',
-            icon: 'success',
-            timer: 2000, // Tiempo en milisegundos (en este caso, 3 segundos)
-            showConfirmButton: false, // Ocultar el botón de confirmación
-          });
           this.route.navigate(['dashboard']);
         },
       });

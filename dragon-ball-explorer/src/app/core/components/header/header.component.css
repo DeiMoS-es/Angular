@@ -1,0 +1,15 @@
+header {
+    background-color: #F57C00;
+    width: 100vw;
+    height: 6rem; /* Asegúrate de que esta altura esté definida */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.logo {height: 100%;}
+.logo .img {height: 100%; /* Asegurar que el contenedor de la imagen tenga el tamaño del padre */display: flex; /* Añadir flex para alinear el contenido */}
+.txt .texto{
+    font-size: 1.5rem;
+    color: #212121;
+    font-weight: bold;
+}

@@ -1,3 +1,5 @@
+import { Imagen } from "./imagen";
+
 export interface Producto {
     idProducto: number;
     nombreProducto: string;
@@ -6,4 +8,5 @@ export interface Producto {
     stockProducto: number;
     tipoProducto: string;
     fechaAltaProducto?: Date;
+    imagen: Imagen;
 }

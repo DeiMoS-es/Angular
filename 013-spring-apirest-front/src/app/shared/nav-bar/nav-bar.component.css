@@ -13,3 +13,10 @@ div.mr-100 ul.list-group{
 div.mr-100 ul.list-group li:hover{
     background-color: rgba(200, 200, 200);
 }
+.nav-item .nav-link mat-icon {
+    /* Estilos específicos para el mat-icon dentro de un elemento con la clase nav-item */
+    margin-right: 10px;
+  }
+.nav-item .nav-link{
+    max-height: 36px;
+}

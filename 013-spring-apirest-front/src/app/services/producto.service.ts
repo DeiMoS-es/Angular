@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable,Subject } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { Producto } from '../interface/producto';
 import { SharedServiceService } from './shared-service.service';
 
@@ -21,11 +21,11 @@ export class ProductoService {
     return this.httpClient.delete(`${this.baseUrl}/eliminar/${idProducto}`);
   }
 
-  public guardarProducto(producto: Producto){
+  public guardarProducto(producto: FormData){
     return this.httpClient.post(`${this.baseUrl}/guardar`, producto);
   }
 
-  public editarProducto(idProducto: number, producto: Producto){
+  public editarProducto(idProducto: number, producto: FormData){
     return this.httpClient.put(`${this.baseUrl}/editar/${idProducto}`, producto);
   }
 

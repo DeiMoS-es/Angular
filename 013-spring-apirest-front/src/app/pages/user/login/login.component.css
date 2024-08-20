@@ -1,0 +1,35 @@
+.login-form {
+    width: 300px; /* Ancho deseado para el formulario */
+    margin: 0 auto; /* Centrar el formulario en la página */
+    display: flex;
+    flex-direction: column; /* Apila los campos uno encima del otro */
+}
+
+.custom-form-field {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+}
+  
+.icon-label-container {
+  display: flex;
+  align-items: center;
+}
+
+.mat-icon {
+  width: 38px;
+  margin-right: 8px;
+}
+
+.invalid-input {
+    border: 1px solid red;
+}
+  
+mat-form-field .ng-valid:not(form).ng-touched{
+  border-left: 5px solid #42a948;
+}
+
+mat-form-field .ng-invalid:not(form).ng-touched{
+  border-left: 5px solid #a94442;
+}

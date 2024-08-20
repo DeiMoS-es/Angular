@@ -1,0 +1,40 @@
+<mat-card class="cart-card">
+    <mat-card-title>Carrito de Compras</mat-card-title>
+    <mat-table [dataSource]="listaProductos" matSort class="mat-elevation-z8" *ngIf="listaProductos.length > 0">
+        <!-- Nombre de Producto Column -->
+        <ng-container matColumnDef="nombreProducto">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre de Producto </mat-header-cell>
+            <mat-cell *matCellDef="let producto"> {{producto.nombreProducto}} </mat-cell>
+        </ng-container>
+
+        <!-- Precio de Producto Column -->
+        <ng-container matColumnDef="precioProducto">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Precio de Producto </mat-header-cell>
+            <mat-cell *matCellDef="let producto"> {{producto.precioProducto | number:'1.2-2' }} € </mat-cell>
+        </ng-container>
+
+        <!-- Cantidad de Producto Column -->
+        <ng-container matColumnDef="cantidad">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad de Producto </mat-header-cell>
+            <mat-cell *matCellDef="let producto"> {{producto.cantidad}} unidades </mat-cell>
+        </ng-container>
+
+        <!-- Columna del total de cada producto -->
+        <ng-container matColumnDef="total">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Total </mat-header-cell>
+            <mat-cell *matCellDef="let producto"> {{calcularPrecioTotalProducto(producto.cantidad, producto.precioProducto) | number:'1.2-2' }} €</mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <div class="precio-total" *ngIf="listaProductos.length > 0">
+        Precio Total del Pedido: {{ calcularTotalPedido(listaProductos) | number:'1.2-2' }} €
+        <div class="confirmar-pedido">
+            <button mat-raised-button color="primary" class="confirmar-pedido" (click)="confirmarPedido()">Confirmar Pedido</button>
+        </div>
+    </div>
+    <div class="paginator-container" *ngIf="listaProductos.length > 5">
+        <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+    </div>
+</mat-card>

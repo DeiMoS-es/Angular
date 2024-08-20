@@ -12,13 +12,23 @@ import { NavBarComponent } from './shared/nav-bar/nav-bar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditarProductoComponent } from './pages/editar-producto/editar-producto.component';
+import { LoginComponent } from './pages/user/login/login.component';
+import { AuthInterceptor } from './interceptor/auth.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // Angular Material
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-
+import { MatBadgeModule } from '@angular/material/badge';
+import { CarritoComponent } from './pages/carrito/carrito.component';
+import { MatListModule } from '@angular/material/list';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { RegisterComponent } from './pages/user/register/register.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +38,9 @@ import { MatCardModule } from '@angular/material/card';
     GuardarProductoComponent,
     NavBarComponent,
     EditarProductoComponent,
+    CarritoComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -39,9 +52,21 @@ import { MatCardModule } from '@angular/material/card';
     MatButtonModule,
     FormsModule, 
     ReactiveFormsModule,
-    MatCardModule
+    MatCardModule,
+    MatBadgeModule,
+    MatListModule,
+    MatGridListModule,
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
