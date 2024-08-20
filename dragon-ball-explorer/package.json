@@ -2,6 +2,7 @@
   "name": "dragon-ball-explorer",
   "version": "0.0.0",
   "scripts": {
+    "prebuild": "npm install",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
