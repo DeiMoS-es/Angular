@@ -14,7 +14,6 @@ export class CarritoService {
 
   agregarProducto(producto: Producto) {
     const productoExistente = this.listaProductos.find((p) => p.idProducto === producto.idProducto);
-
     if (productoExistente) {
       // Si el producto ya está en el carrito, aumenta la cantidad
       productoExistente.cantidad++;

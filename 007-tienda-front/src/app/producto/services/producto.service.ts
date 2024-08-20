@@ -23,9 +23,9 @@ export class ProductoService {
     return this.httpClient.get(`${baseUrl}/buscar/${idProducto}`);
   }
 
-  public guardarProducto(producto: any){
-    return this.httpClient.post(`${baseUrl}/guardar`, producto);
-  }
+  // public guardarProducto(producto: any){
+  //   return this.httpClient.post(`${baseUrl}/guardar`, producto);
+  // }
 
   public guardarProducto(producto: FormData): Observable<any>{
     return this.httpClient.post(`${baseUrl}/guardar`, producto);

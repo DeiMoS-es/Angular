@@ -19,12 +19,10 @@ export class HeaderComponent {
   nombreProducto: string = '';
   usuarioIsLogin: boolean = false;
   token: string | null;
-  constructor(private formBuilder: FormBuilder, 
-              private productoService: ProductoServiceService, 
-              private route: Router, 
-              private contadorCarritoService: ContadorCarritoService,
-              private loginService: LoginService,
-              private usuarioService: UsuarioService) {
+  constructor(private formBuilder: FormBuilder,  private productoService: ProductoServiceService, 
+              private route: Router,  private contadorCarritoService: ContadorCarritoService,
+              private loginService: LoginService, private usuarioService: UsuarioService) 
+              {
                 route.events.subscribe((event) => {
                   if (event instanceof NavigationEnd) {
                     // Verificar si estamos en la página de login
@@ -84,7 +82,6 @@ export class HeaderComponent {
   }
   // Cierra la sesión (elimina el token)
   public logout(): void {
-    console.log("Hago click");
     this.usuarioIsLogin = false;
     this.loginService.logout();
     this.route.navigateByUrl("/login");
