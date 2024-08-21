@@ -5,6 +5,7 @@ import { CharacterViewComponent } from './features/characters/character-view/cha
 
 const routes: Routes = [
   {path: '', component: CharacterListComponent},
+  {path: 'characters', component: CharacterListComponent},
   {path: 'characters/:id', component: CharacterViewComponent}
 ];
 // const routes: Routes = [
