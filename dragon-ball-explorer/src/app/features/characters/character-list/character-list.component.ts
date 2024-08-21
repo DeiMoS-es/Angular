@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CharacterService } from '../character.service';
 import { Character } from '../models/character.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-character-list',
@@ -17,7 +18,7 @@ export class CharacterListComponent implements OnInit {
   totalHeroes: number = 0;
   heroLimit: number = 0;
 
-  constructor(private characterService: CharacterService) { };
+  constructor(private characterService: CharacterService, private router: Router) { };
   
   ngOnInit(): void {
     this.characterService.getCharacters().subscribe((characterResponse) => {
@@ -78,4 +79,8 @@ export class CharacterListComponent implements OnInit {
       }
     });
   };
+
+  public viewHeroDetail(heroId: number): void {
+    this.router.navigate(['/characters', heroId]);
+  }
 }

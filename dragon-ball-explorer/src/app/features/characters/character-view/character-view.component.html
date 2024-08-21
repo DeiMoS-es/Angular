@@ -1,0 +1,42 @@
+<section class="characterDetail" *ngIf="character">
+    <div class="characterDetail__image">
+        <img [src]="character.image" [alt]="character.name" />
+    </div>
+    <div class="characterDetail__info_base">
+        <h2 class="name"> 
+            {{character.name}} - 
+            <span class="race">{{character.race}}</span> - 
+            <span class="gender">{{character.gender}}</span>
+        </h2>
+        <div class="power">    
+            <p>KI base: <span class="powerKi">{{character.ki}}</span></p>
+            <p>MAXKI: <span class="powerKi">{{character.maxKi}}</span></p>
+        </div>
+    </div>
+    <div class="characterDetail__info_description">
+        <p>{{character.description}}</p>
+    </div>
+    <div class="characterDetail__info_extra">
+        <p>Afiliación: {{character.affiliation}}</p>
+        <div class="planeta" *ngIf="character.originPlanet">
+            <p>Planeta origen: {{character.originPlanet.name}}</p>
+            <div class="characterDetail__image">
+                <img [src]="character.originPlanet.image" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="characterDetail_info_transformation" *ngIf="character.transformations">
+        <h2>Transformaciones</h2>
+        <div class="transformations">
+            <div *ngFor="let transformation of character.transformations">
+                <div class="characterDetail__image">
+                    <img [src]="transformation.image" [alt]="transformation.name">
+                </div>
+                <div class="power">
+                    <p class="name">{{transformation.name}}</p>
+                    <p class="characterKi">KI: <span class="powerKi">{{transformation.ki}}</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

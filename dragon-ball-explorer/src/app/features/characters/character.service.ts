@@ -17,4 +17,8 @@ export class CharacterService {
   public getNextsCharacters(pagIndex: number, heroLimit: number){
     return this.httpClient.get<Character[]>(`${this.baseUrl}characters?page=${pagIndex}&limit=${heroLimit}`);
   };
+
+  public getCharacterById(id: number) {
+    return this.httpClient.get<Character>(`${this.baseUrl}characters/${id}`);
+  };
 }

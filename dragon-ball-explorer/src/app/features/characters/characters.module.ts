@@ -6,23 +6,28 @@ import { HttpClientModule } from '@angular/common/http';
 import { CharacterCardComponent } from './character-card/character-card.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { CharacterViewComponent } from './character-view/character-view.component';
+import { RouterModule } from '@angular/router';
 
 
 
 @NgModule({
   declarations: [
     CharacterListComponent,
-    CharacterCardComponent
+    CharacterCardComponent,
+    CharacterViewComponent
   ],
   imports: [
     CommonModule,
     HttpClientModule,
     MatCardModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    RouterModule
   ],
   exports: [
     CharacterListComponent,
-    CharacterCardComponent
+    CharacterCardComponent,
+    CharacterViewComponent
   ],
   providers: [
     CharacterService

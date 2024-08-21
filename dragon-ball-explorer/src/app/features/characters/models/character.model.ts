@@ -1,3 +1,6 @@
+import { OriginPlanet } from "./originPlanet.model";
+import { Transformation } from "./transformation.model";
+
 export interface Character{
     id: number;
     name: string;
@@ -8,4 +11,6 @@ export interface Character{
     description: string;
     image: string;
     affiliation: string;
+    originPlanet?: OriginPlanet;
+    transformations?: Transformation[];
 }

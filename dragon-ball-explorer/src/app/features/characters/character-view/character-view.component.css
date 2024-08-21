@@ -1,0 +1,89 @@
+section.characterDetail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #272B33;
+}
+
+.characterDetail__image {
+    width: 6.25rem;
+    height: 6.25rem;
+    border-radius: 50%;
+    overflow: hidden; 
+}
+
+.characterDetail__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Asegura que la imagen se ajuste bien dentro del contenedor */
+    object-position: top; /* Centra la imagen en la parte superior para evitar recortes de la cabeza */
+}
+
+.characterDetail__info_base {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.characterDetail__info_base .name,
+.characterDetail__info_base .power,
+.characterDetail__info_description p,
+.characterDetail__info_extra,
+.characterDetail_info_transformation {
+    color: white;
+    letter-spacing: 0.1rem;
+    font-weight: 100;
+}
+
+.power span {
+    color: #FFD700;
+}
+
+.characterDetail__info_description p {
+    margin: 0 1rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3; /* Propiedad estándar */
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    max-height: 5em; /* Ajusta esto según la altura de línea */
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.characterDetail__info_description p:hover {
+    max-height: none;
+    -webkit-line-clamp: unset;
+    line-clamp: unset; /* Propiedad estándar */
+    overflow: visible;
+    transform: scale(1.05); /* Efecto zoom */
+}
+
+.characterDetail__info_extra {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.characterDetail__info_extra .planeta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.characterDetail_info_transformation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.characterDetail_info_transformation .transformations {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+}
