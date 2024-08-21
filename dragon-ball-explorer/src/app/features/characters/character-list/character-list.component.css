@@ -33,4 +33,5 @@ app-character-card{
 }
 app-character-card:hover{
     box-shadow: 1px 1px 5px 1px white;
+    cursor: pointer;
 }
