@@ -25,7 +25,7 @@
             </div>
         </div>
     </div>
-    <div class="characterDetail_info_transformation" *ngIf="character.transformations">
+    <div class="characterDetail_info_transformation" *ngIf="character.transformations && character.transformations.length">
         <h2>Transformaciones</h2>
         <div class="transformations">
             <div *ngFor="let transformation of character.transformations">

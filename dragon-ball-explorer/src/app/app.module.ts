@@ -5,9 +5,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from "./core/core.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CharactersModule } from './features/characters/characters.module';
-
-//Material
-import {MatCardModule} from '@angular/material/card';
+import { PlanetsModule } from './features/planets/planets.module';
 
 @NgModule({
   declarations: [
@@ -19,11 +17,9 @@ import {MatCardModule} from '@angular/material/card';
     CoreModule,
     BrowserAnimationsModule,
     CharactersModule,
-    MatCardModule
+    PlanetsModule
 ],
-  providers: [
-  
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

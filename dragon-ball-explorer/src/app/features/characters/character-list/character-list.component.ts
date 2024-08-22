@@ -37,7 +37,7 @@ export class CharacterListComponent implements OnInit {
         this.heroLimit = this.data.meta.itemsPerPage;
       }
       else{
-        console.error('La propiedad items no existe en los datos recibidos');
+        console.error('Error en los datos recibidos');
       }
     });
   };
@@ -49,18 +49,15 @@ export class CharacterListComponent implements OnInit {
   // Función para devolver el índice de la página
   private estadoPageIndex(event: any, pageIndex: number){
     if(pageIndex <= event.pageIndex){
-      console.log("Página siguiente");
       pageIndex++;
     }
     else if(pageIndex > event.pageIndex){
-      console.log("Página anterior");
       pageIndex--;
     }
     return pageIndex;
   };
   
   private obtenerHeroes(pagIndex: number, heroLimit: number) {
-    console.log("Lanzo la función obtenerHeroes con pagIndex: " + pagIndex);
     this.characterService.getNextsCharacters(pagIndex, heroLimit).subscribe((characterResponse) => {
       this.data = characterResponse;
       if (this.data && this.data.items) {
@@ -75,7 +72,7 @@ export class CharacterListComponent implements OnInit {
         this.heroLimit = this.data.meta.itemsPerPage;
       }
       else{
-        console.error('La propiedad items no existe en los datos recibidos');
+        console.error('Error en los datos recibidos');
       }
     });
   };

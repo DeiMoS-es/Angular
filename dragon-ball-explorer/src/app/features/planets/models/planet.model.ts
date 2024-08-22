@@ -1,4 +1,4 @@
-export interface OriginPlanet {
+export interface Planet {
     id: number;
     name: string;
     isDestroyed: boolean;

@@ -6,19 +6,19 @@ import { Character } from './models/character.model';
 @Injectable()
 export class CharacterService {
   // https://dragonball-api.com/api/characters
-  private baseUrl: string = 'https://dragonball-api.com/api/';
+  private urlCharacters: string = 'https://dragonball-api.com/api/';
 
   constructor(private httpClient: HttpClient) { }
 
   public getCharacters() {
-    return this.httpClient.get<Character[]>(`${this.baseUrl}characters`);
+    return this.httpClient.get<Character[]>(`${this.urlCharacters}characters`);
   };
 
   public getNextsCharacters(pagIndex: number, heroLimit: number){
-    return this.httpClient.get<Character[]>(`${this.baseUrl}characters?page=${pagIndex}&limit=${heroLimit}`);
+    return this.httpClient.get<Character[]>(`${this.urlCharacters}characters?page=${pagIndex}&limit=${heroLimit}`);
   };
 
   public getCharacterById(id: number) {
-    return this.httpClient.get<Character>(`${this.baseUrl}characters/${id}`);
+    return this.httpClient.get<Character>(`${this.urlCharacters}characters/${id}`);
   };
 }

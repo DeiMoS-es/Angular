@@ -2,6 +2,7 @@ section.characterDetail {
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-height: 68vH;
     gap: 0.5rem;
     background-color: #272B33;
 }

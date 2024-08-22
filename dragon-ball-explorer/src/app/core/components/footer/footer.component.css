@@ -3,6 +3,8 @@
     color: #f5f5f5;
     padding: 20px;
     text-align: center;
+    display: flex;
+    height: 17%;
 }
 
 .footer-content {

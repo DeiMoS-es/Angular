@@ -1,0 +1,20 @@
+<div class="main">
+    <div class="texto">
+        <h2>Planetas</h2>
+    </div>
+    <div class="planets" *ngFor="let planet of planets">
+        <div class="image">
+            <img [src]="planet.image" [alt]="planet.name" />
+        </div>
+        <div class="detail__info">
+            <div class="planetName">Nombre del planeta: <span>{{planet.name}}</span></div>
+            <div class="planetDescription">{{planet.description}}</div>
+            <div class="planetDestroyed">
+                <div class="estado" [ngClass]="{'vivo': !planet.isDestroyed, 'destruido': planet.isDestroyed}">
+                    <span *ngIf="!planet.isDestroyed">Activo</span>
+                    <span *ngIf="planet.isDestroyed">Destruido</span>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
