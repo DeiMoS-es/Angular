@@ -39,7 +39,11 @@ export class PlanetsListComponent implements OnInit {
       this.planetService.getNextsPlanets(pagIndex, this.planetLimit).subscribe((planetsResponse) => {
         this.data = planetsResponse;
         if (this.data && this.data.items) {
-          this.planets = this.planets.concat(this.data.items);
+          // Filtrar planetas que ya existen en this.planets
+          const newPlanets = this.data.items.filter((planet: Planet) => 
+            !this.planets.some(existingPlanet => existingPlanet.id === planet.id)
+          );
+          this.planets = this.planets.concat(newPlanets);
         }
         if (this.data && this.data.meta) {
           this.totalPage = this.data.meta.totalPages;
